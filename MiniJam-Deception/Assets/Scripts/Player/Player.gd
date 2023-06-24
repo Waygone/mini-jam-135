@@ -62,7 +62,7 @@ func attack():
 
 func _on_damage_area_body_entered(body):
 	if body.is_in_group("Enemy"):
-		body.take_damage(attack_damage, body.global_position - global_position, 5)
+		body.take_damage(attack_damage, body.global_position - global_position, 15)
 	
 func interact():
 	is_interacting = true

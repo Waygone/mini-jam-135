@@ -17,7 +17,6 @@ func _state_logic(_delta):
 
 func _get_transition():
 	match state:
-
 		states.Idle:
 			if parent.is_attacking:
 				return states.Attack

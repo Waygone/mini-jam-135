@@ -91,7 +91,7 @@ func _on_navigation_timer_timeout():
 		create_path(global_position)
 		player_detected = false
 
-	elif(player_detected and !is_attacking and state_machine.state != Damaged and nav_agent.is_target_reachable()):
+	elif(player_detected and !is_attacking and nav_agent.is_target_reachable()):
 		create_path(player.global_position)
 	
 func get_circle_position(random):
@@ -138,7 +138,7 @@ func _on_attack_rate_timeout():
 """|||||||||||||||||||||||||||||||||||| DAMAGE |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
 func take_damage(dmg, push_direction, force):
-	is_attacking = false
+	#is_attacking = false
 	force = force if hp > 0 else force * 2
 	velocity += push_direction * force
 	move_and_slide()

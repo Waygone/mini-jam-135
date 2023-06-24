@@ -309,8 +309,9 @@ _data = {
 "Walk": SubResource("Animation_3wvs4")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_58ug4"]
-size = Vector2(126, 127)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h8uqc"]
+radius = 64.0
+height = 128.0
 
 [node name="BasicEnemy" type="CharacterBody2D" groups=["Enemy"]]
 visibility_layer = 2
@@ -364,8 +365,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_58ug4")
+shape = SubResource("CapsuleShape2D_h8uqc")
 
 [node name="FiniteStateMachine" type="Node" parent="."]
 script = ExtResource("1_fj8ch")
