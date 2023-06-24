@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ccmx1xudkf7o2"]
 
-[ext_resource type="TileSet" uid="uid://bxgjbs1ew1kp" path="res://sprites/dungeon-tiles/tileset_dungeon-tiles.tres" id="1_6b3fl"]
+[ext_resource type="TileSet" uid="uid://bxgjbs1ew1kp" path="res://Sprites/dungeon-tiles/tileset_dungeon-tiles.tres" id="1_6b3fl"]
 
 [node name="MapTest" type="Node2D"]
 
