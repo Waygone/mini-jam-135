@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgvlbliw68sdh"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Base/UI.gd" id="1_nd0qy"]
+[ext_resource type="PackedScene" uid="uid://caafuiqbhkkbf" path="res://Assets/Scenes/Menus/UI/HpBar.tscn" id="2_6yd86"]
+[ext_resource type="PackedScene" uid="uid://csy8a8he4ieuw" path="res://Assets/Scenes/Menus/UI/counter.tscn" id="3_7rkba"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_nd0qy")
+
+[node name="HpBar" parent="." instance=ExtResource("2_6yd86")]
+
+[node name="Counter" parent="." instance=ExtResource("3_7rkba")]

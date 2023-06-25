@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfos036fvag1d"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y5ref"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r6i8d"]
+radius = 52.0
+
+[node name="Pickable" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_y5ref")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_r6i8d")

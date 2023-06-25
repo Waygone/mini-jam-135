@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://c10te28uubpen"]
+
+[ext_resource type="PackedScene" uid="uid://cfos036fvag1d" path="res://Assets/Prefabs/Pickable.tscn" id="1_0hraf"]
+[ext_resource type="Script" path="res://Assets/Scripts/Pickables/Door.gd" id="2_yw7dr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_46dvg"]
+
+[node name="Door" instance=ExtResource("1_0hraf")]
+script = ExtResource("2_yw7dr")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_46dvg")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
