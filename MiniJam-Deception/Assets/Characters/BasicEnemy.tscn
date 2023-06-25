@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Assets/Scripts/Enemy/BasicEnemy.gd" id="1_bissd"]
 [ext_resource type="Script" path="res://Assets/Scripts/Enemy/BasicEnemyFSM.gd" id="1_fj8ch"]
-[ext_resource type="Texture2D" uid="uid://bau5ifxlripkb" path="res://icon.svg" id="1_j3kng"]
+[ext_resource type="Texture2D" uid="uid://bau5ifxlripkb" path="res://Sprites/icon.svg" id="1_j3kng"]
 [ext_resource type="Texture2D" uid="uid://dqhs4kgqc2awt" path="res://Assets/Sprites/Placeholder/attack1.png" id="2_4qa8l"]
 [ext_resource type="Shader" path="res://Assets/Shaders/BasicEnemy.gdshader" id="2_8jlet"]
 [ext_resource type="Texture2D" uid="uid://cltaffh7c2w7w" path="res://Assets/Sprites/Placeholder/attack2.png" id="3_w86s6"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://bofennc76qhna"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Player/Player.gd" id="1_qcmka"]
-[ext_resource type="Texture2D" uid="uid://bau5ifxlripkb" path="res://icon.svg" id="2_7aqug"]
+[ext_resource type="Texture2D" uid="uid://bau5ifxlripkb" path="res://Sprites/icon.svg" id="2_7aqug"]
 [ext_resource type="Script" path="res://Assets/Scripts/Player/PlayerFSM.gd" id="3_jsj1k"]
 [ext_resource type="Texture2D" uid="uid://dqhs4kgqc2awt" path="res://Assets/Sprites/Placeholder/attack1.png" id="3_v6dwi"]
 [ext_resource type="Texture2D" uid="uid://cltaffh7c2w7w" path="res://Assets/Sprites/Placeholder/attack2.png" id="4_upnjx"]
@@ -286,6 +286,8 @@ texture = ExtResource("7_6cbbv")
 texture_scale = 25.0
 
 [node name="PlayerLight" type="PointLight2D" parent="."]
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.431373)
 shadow_item_cull_mask = 15
 texture = ExtResource("7_6cbbv")
 texture_scale = 4.0
