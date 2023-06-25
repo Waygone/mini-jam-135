@@ -65,7 +65,8 @@ func collect_points(points: int):
 	emit_signal("gold_changed", totalPoints)
 
 func _on_load_save_system_timer_timeout():
-	collect_points(0.0)
+	pass
+	#collect_points(0.0)
 
 """|||||||||||||||||||||||||||||||||||| INPUT |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
