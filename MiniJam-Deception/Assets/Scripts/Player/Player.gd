@@ -58,6 +58,7 @@ func _physics_process(_delta):
 
 func collect_points(points: int):
 	var levelName = "OneLevel"  # Assuming the level scene name is used as the level identifier
+	save_system.load_points(levelName, 0)
 	var totalPoints = save_system.load_points(levelName)
 	totalPoints += points
 	save_system.save_points(levelName, totalPoints)
