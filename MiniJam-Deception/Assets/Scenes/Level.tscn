@@ -1,16 +1,34 @@
-[gd_scene load_steps=12 format=3 uid="uid://olak8v8rsxui"]
+[gd_scene load_steps=15 format=3 uid="uid://olak8v8rsxui"]
 
 [ext_resource type="PackedScene" uid="uid://bofennc76qhna" path="res://Assets/Characters/player.tscn" id="1_2r152"]
 [ext_resource type="PackedScene" uid="uid://dv5lyhhkfpptt" path="res://Assets/Prefabs/Pickables/BiggerGold.tscn" id="1_6wmiw"]
-[ext_resource type="PackedScene" uid="uid://dabooykdeqnm7" path="res://Assets/Prefabs/Pickables/Disguise.tscn" id="1_bi3jy"]
 [ext_resource type="PackedScene" uid="uid://c10te28uubpen" path="res://Assets/Prefabs/Pickables/door.tscn" id="1_g6iqs"]
 [ext_resource type="PackedScene" uid="uid://du76st4c5ioh0" path="res://Assets/Characters/BasicEnemy.tscn" id="2_c4s5m"]
 [ext_resource type="PackedScene" uid="uid://dph2c466mry5v" path="res://Assets/Prefabs/Pickables/gold.tscn" id="2_owro8"]
 [ext_resource type="PackedScene" uid="uid://dk6bgw6bhdjsc" path="res://Assets/Scenes/Level_2.tscn" id="2_yqvnn"]
 [ext_resource type="PackedScene" uid="uid://bgvlbliw68sdh" path="res://Assets/Scenes/Menus/UI.tscn" id="4_7lv61"]
 [ext_resource type="PackedScene" uid="uid://b70ip0mko7qr5" path="res://Assets/Characters/Boss.tscn" id="5_6q1b0"]
-[ext_resource type="TileSet" uid="uid://bxgjbs1ew1kp" path="res://Sprites/dungeon-tiles/tileset_dungeon-tiles.tres" id="5_qvfbb"]
+[ext_resource type="TileSet" uid="uid://bxgjbs1ew1kp" path="res://sprites/dungeon-tiles/tileset_dungeon-tiles.tres" id="5_qvfbb"]
 [ext_resource type="Script" path="res://Assets/Scripts/Base/SaveSystem.gd" id="11_u3got"]
+[ext_resource type="Texture2D" uid="uid://s6sitadk15on" path="res://sprites/tileset.png" id="12_vskaf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0riy"]
+size = Vector2(5.46759, 6.21318)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76k3w"]
+atlas = ExtResource("12_vskaf")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f3hey"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76k3w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="World" type="Node2D"]
 
@@ -21,19 +39,17 @@ next_scene = ExtResource("2_yqvnn")
 [node name="Treasures" type="Node2D" parent="."]
 
 [node name="BiggestGold" parent="Treasures" instance=ExtResource("1_6wmiw")]
-position = Vector2(865, 818)
+position = Vector2(1140, 765)
 
 [node name="Gold" parent="Treasures" instance=ExtResource("2_owro8")]
-position = Vector2(842, 47)
+position = Vector2(854, 36)
+rotation = -0.186165
 
 [node name="Gold2" parent="Treasures" instance=ExtResource("2_owro8")]
-position = Vector2(344, 698)
+position = Vector2(338, 689)
 
 [node name="Gold3" parent="Treasures" instance=ExtResource("2_owro8")]
-position = Vector2(95, -795)
-
-[node name="Disguise" parent="." instance=ExtResource("1_bi3jy")]
-position = Vector2(179, -828)
+position = Vector2(804, 410)
 
 [node name="Player" parent="." instance=ExtResource("1_2r152")]
 position = Vector2(162, -727)
@@ -48,12 +64,6 @@ position = Vector2(470, -19)
 [node name="Boss" parent="Enemies" instance=ExtResource("5_6q1b0")]
 position = Vector2(366, 803)
 scale = Vector2(0.2, 0.2)
-
-[node name="E_Room_1" parent="Enemies" instance=ExtResource("2_c4s5m")]
-position = Vector2(-316, -486)
-scale = Vector2(0.2, 0.2)
-drops_disguise = true
-waypoints = Array[NodePath]([NodePath("../Waypoints/Room_1/E_1_1"), NodePath("../Waypoints/Room_1/E_1_2"), NodePath("../Waypoints/Room_1/E_1_3"), NodePath("../Waypoints/Room_1/E_1_4")])
 
 [node name="E_Room_1_2" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(-318, 143)
@@ -71,10 +81,12 @@ scale = Vector2(0.2, 0.2)
 [node name="E_Room_2_2" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(59, 208)
 scale = Vector2(0.2, 0.2)
+waypoints = Array[NodePath]([NodePath("../Waypoints/Room_2/E_2_1"), NodePath("../Waypoints/Room_2/E_2_2")])
 
 [node name="E_Room_2_3" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(-133, 449)
 scale = Vector2(0.2, 0.2)
+waypoints = Array[NodePath]([NodePath("../Waypoints/Room_2/E_3_1"), NodePath("../Waypoints/Room_2/E_3_2")])
 
 [node name="E_Room_2_4" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(283, 441)
@@ -83,10 +95,17 @@ scale = Vector2(0.2, 0.2)
 [node name="E_Room_2_5" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(284, 322)
 scale = Vector2(0.2, 0.2)
+waypoints = Array[NodePath]([NodePath("../Waypoints/Room_2/E_5_1")])
 
 [node name="E_Room_3_1" parent="Enemies" instance=ExtResource("2_c4s5m")]
-position = Vector2(-176, 707)
+position = Vector2(-59, 737)
 scale = Vector2(0.2, 0.2)
+
+[node name="E_Room_1" parent="Enemies" instance=ExtResource("2_c4s5m")]
+position = Vector2(-316, -486)
+scale = Vector2(0.2, 0.2)
+drops_disguise = true
+waypoints = Array[NodePath]([NodePath("../Waypoints/Room_1/E_1_1"), NodePath("../Waypoints/Room_1/E_1_2"), NodePath("../Waypoints/Room_1/E_1_3"), NodePath("../Waypoints/Room_1/E_1_4")])
 
 [node name="Waypoints" type="Node2D" parent="Enemies"]
 
@@ -131,6 +150,7 @@ position = Vector2(284, 356)
 
 [node name="TileMap" type="TileMap" parent="."]
 light_mask = 15
+z_index = -1
 position = Vector2(770, -913)
 tile_set = ExtResource("5_qvfbb")
 format = 2
@@ -139,9 +159,47 @@ layer_0/tile_data = PackedInt32Array(458734, 65539, 2, 393198, 65539, 2, 327662,
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 light_mask = 2
 visibility_layer = 2
+color = Color(0.356863, 0.356863, 0.356863, 1)
 
 [node name="SaveSystem" type="Node" parent="." groups=["Save"]]
 script = ExtResource("11_u3got")
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="Pedestal" type="StaticBody2D" parent="Items"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Items/Pedestal"]
+position = Vector2(850, 53.5)
+scale = Vector2(4.02371, 4.02371)
+shape = SubResource("RectangleShape2D_e0riy")
+
+[node name="Pedestal" type="AnimatedSprite2D" parent="Items/Pedestal"]
+light_mask = 16
+visibility_layer = 16
+position = Vector2(854, 61)
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_f3hey")
+
+[node name="Pedestal3" type="AnimatedSprite2D" parent="Items/Pedestal"]
+light_mask = 16
+visibility_layer = 16
+position = Vector2(804, 436)
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_f3hey")
+
+[node name="Pedestal4" type="AnimatedSprite2D" parent="Items/Pedestal"]
+light_mask = 16
+visibility_layer = 16
+position = Vector2(1142, 795)
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_f3hey")
+
+[node name="Pedestal2" type="AnimatedSprite2D" parent="Items/Pedestal"]
+light_mask = 16
+visibility_layer = 16
+position = Vector2(340, 715)
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_f3hey")
 
 [connection signal="gold_changed" from="Player" to="UI" method="_on_player_gold_changed"]
 [connection signal="hp_changed" from="Player" to="UI" method="_on_player_hp_changed"]

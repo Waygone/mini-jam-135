@@ -15,7 +15,7 @@ var save_system
 
 """|||||||||||||||||||||||||||||||||||| VARs |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
-@export var speed = 500.0
+@export var speed = 300.0
 @export var attack_damage = 10.0
 @export var hp = 100:
 	set(value):
@@ -32,7 +32,7 @@ signal hp_changed(new_hp)
 signal gold_changed(new_gold)
 
 const FRICTION = 10
-
+var stopwatch = 0.0
 
 """|||||||||||||||||||||||||||||||||||| ACTIONS |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
@@ -49,6 +49,8 @@ func _ready():
 	
 	save_system = get_tree().get_first_node_in_group("Save")
 
+func _process(delta):
+	stopwatch += delta
 
 func _physics_process(_delta):
 	movement_input(_delta)
@@ -57,16 +59,14 @@ func _physics_process(_delta):
 	look_at(get_global_mouse_position())
 
 func collect_points(points: int):
-	var levelName = "OneLevel"  # Assuming the level scene name is used as the level identifier
-	save_system.load_points(levelName, 0)
+	var levelName = "One"  # Assuming the level scene name is used as the level identifier
 	var totalPoints = save_system.load_points(levelName)
 	totalPoints += points
 	save_system.save_points(levelName, totalPoints)
 	emit_signal("gold_changed", totalPoints)
 
 func _on_load_save_system_timer_timeout():
-	pass
-	#collect_points(0.0)
+	collect_points(0)
 
 """|||||||||||||||||||||||||||||||||||| INPUT |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
@@ -102,7 +102,8 @@ func disguise(is_dis: bool):
 
 func add_gold(amount):
 	gold += amount
-	emit_signal("gold_changed", gold)
+	collect_points(amount)
+	#emit_signal("gold_changed", gold)
 
 """|||||||||||||||||||||||||||||||||||| HEALTH |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 

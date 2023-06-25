@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dqhs4kgqc2awt" path="res://Assets/Sprites/Placeholder/attack1.png" id="2_f0jjd"]
 [ext_resource type="Texture2D" uid="uid://cltaffh7c2w7w" path="res://Assets/Sprites/Placeholder/attack2.png" id="3_feqj4"]
 [ext_resource type="Texture2D" uid="uid://1el7ktml3x8i" path="res://Assets/Sprites/Placeholder/attack3.png" id="4_0u0si"]
-[ext_resource type="Texture2D" uid="uid://bau5ifxlripkb" path="res://icon.svg" id="5_0sxeb"]
+[ext_resource type="Texture2D" uid="uid://bau5ifxlripkb" path="res://sprites/icon.svg" id="5_0sxeb"]
 [ext_resource type="Script" path="res://Assets/Scripts/Enemy/BossFSM.gd" id="5_gwyc5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jdhgd"]

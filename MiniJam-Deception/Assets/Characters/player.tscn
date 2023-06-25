@@ -1,12 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://bofennc76qhna"]
+[gd_scene load_steps=19 format=3 uid="uid://bofennc76qhna"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Player/Player.gd" id="1_qcmka"]
-[ext_resource type="Texture2D" uid="uid://bau5ifxlripkb" path="res://Sprites/icon.svg" id="2_7aqug"]
+[ext_resource type="Texture2D" uid="uid://bau5ifxlripkb" path="res://sprites/icon.svg" id="2_7aqug"]
 [ext_resource type="Script" path="res://Assets/Scripts/Player/PlayerFSM.gd" id="3_jsj1k"]
 [ext_resource type="Texture2D" uid="uid://dqhs4kgqc2awt" path="res://Assets/Sprites/Placeholder/attack1.png" id="3_v6dwi"]
 [ext_resource type="Texture2D" uid="uid://cltaffh7c2w7w" path="res://Assets/Sprites/Placeholder/attack2.png" id="4_upnjx"]
 [ext_resource type="Texture2D" uid="uid://1el7ktml3x8i" path="res://Assets/Sprites/Placeholder/attack3.png" id="5_slfw0"]
 [ext_resource type="Texture2D" uid="uid://c7dhe0dru6cha" path="res://Assets/Sprites/Placeholder/point_light.jpg" id="7_6cbbv"]
+[ext_resource type="Texture2D" uid="uid://bqup0fjghn5of" path="res://Assets/Sprites/Placeholder/2d_light.png" id="7_huq42"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wx4lt"]
 radius = 65.5934
@@ -260,7 +261,7 @@ shape = SubResource("CircleShape2D_o26bc")
 [node name="Timers" type="Node2D" parent="."]
 
 [node name="LoadSaveSystemTimer" type="Timer" parent="Timers"]
-wait_time = 3.0
+wait_time = 0.8
 one_shot = true
 autostart = true
 
@@ -278,14 +279,15 @@ position = Vector2(0, -1)
 [node name="Attack" type="AudioStreamPlayer2D" parent="SFX"]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 3.0
 range_item_cull_mask = 14
 shadow_enabled = true
+shadow_color = Color(0.0901961, 0.0901961, 0.0901961, 0.431373)
 shadow_item_cull_mask = 14
-texture = ExtResource("7_6cbbv")
-texture_scale = 25.0
+texture = ExtResource("7_huq42")
+texture_scale = 20.0
 
 [node name="PlayerLight" type="PointLight2D" parent="."]
+energy = 0.5
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 0.431373)
 shadow_item_cull_mask = 15

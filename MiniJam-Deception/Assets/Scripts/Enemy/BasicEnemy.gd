@@ -22,7 +22,7 @@ enum{
 
 """|||||||||||||||||||||||||||||||||||| VARs |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
-@export var speed = 100.0
+@export var speed = 250.0
 
 @export var hp = 100:
 	set(value):
@@ -81,10 +81,12 @@ func _ready():
 
 
 func _process(_delta):
-	detect_player()
+	if !is_dead:
+		detect_player()
 
 func _physics_process(_delta):
-	movement_handler()
+	if !is_dead:
+		movement_handler()
 
 """|||||||||||||||||||||||||||||||||||| HANDLERS |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
@@ -169,7 +171,6 @@ func _on_alert_other_enemy_body_entered(body):
 	
 func _on_attack_area_body_entered(body):
 	if body.is_in_group("Player"):
-		body.disguise(false)
 		attack()
 
 func _on_attack_area_body_exited(body):
@@ -179,6 +180,7 @@ func _on_attack_area_body_exited(body):
 func _on_damage_area_body_entered(body):
 	if body.is_in_group("Player"):
 		body.take_damage(damage, body.global_position - global_position, 10)
+		body.disguise(false)
 	
 
 """|||||||||||||||||||||||||||||||||||| ACTIONS |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
@@ -232,23 +234,15 @@ func take_damage(dmg, push_direction, force):
 
 func die():
 	$CollisionShape2D.set_deferred("disabled", true)
-	var disguise_instance = disguise_scene.instantiate()
-	add_child(disguise_instance)
+	alert_other_enemies(true)
+	if !player.is_disguised:
+		var disguise_instance = disguise_scene.instantiate()
+		disguise_instance.global_position = global_position
+		get_tree().get_root().get_node("World/Treasures").add_child(disguise_instance)
+	$Timers/DeathTimer.start()
+	$DeathParticles.set_deferred("emitting", true)
+	$Rotate/AnimatedSprite2D.visible = false
+	
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+func _on_death_timer_timeout():
+	queue_free()

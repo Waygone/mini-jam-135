@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ci5hc6q387kwo"
-path="res://.godot/imported/dungeon-wall-wang.png-375cbfd7807996004b2bc80ca8f111f2.ctex"
+path="res://.godot/imported/dungeon-wall-wang.png-9f8f129f097b8fadd56351624d4efa23.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/dungeon-wall-wang.png"
-dest_files=["res://.godot/imported/dungeon-wall-wang.png-375cbfd7807996004b2bc80ca8f111f2.ctex"]
+source_file="res://sprites/dungeon-wall-wang.png"
+dest_files=["res://.godot/imported/dungeon-wall-wang.png-9f8f129f097b8fadd56351624d4efa23.ctex"]
 
 [params]
 
