@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv5lyhhkfpptt"]
+
+[ext_resource type="PackedScene" uid="uid://cfos036fvag1d" path="res://Assets/Prefabs/Pickable.tscn" id="1_htpgl"]
+[ext_resource type="Script" path="res://Assets/Scripts/Pickables/gold.gd" id="2_k1ar5"]
+
+[node name="Gold" instance=ExtResource("1_htpgl")]
+script = ExtResource("2_k1ar5")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

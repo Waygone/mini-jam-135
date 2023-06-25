@@ -1,12 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://du76st4c5ioh0"]
+[gd_scene load_steps=20 format=3 uid="uid://b70ip0mko7qr5"]
 
-[ext_resource type="Script" path="res://Assets/Scripts/Enemy/BasicEnemy.gd" id="1_bissd"]
-[ext_resource type="Script" path="res://Assets/Scripts/Enemy/BasicEnemyFSM.gd" id="1_fj8ch"]
-[ext_resource type="Texture2D" uid="uid://bau5ifxlripkb" path="res://icon.svg" id="1_j3kng"]
-[ext_resource type="Texture2D" uid="uid://dqhs4kgqc2awt" path="res://Assets/Sprites/Placeholder/attack1.png" id="2_4qa8l"]
-[ext_resource type="Shader" path="res://Assets/Shaders/BasicEnemy.gdshader" id="2_8jlet"]
-[ext_resource type="Texture2D" uid="uid://cltaffh7c2w7w" path="res://Assets/Sprites/Placeholder/attack2.png" id="3_w86s6"]
-[ext_resource type="Texture2D" uid="uid://1el7ktml3x8i" path="res://Assets/Sprites/Placeholder/attack3.png" id="4_qln4e"]
+[ext_resource type="Script" path="res://Assets/Scripts/Enemy/Boss.gd" id="1_oidh0"]
+[ext_resource type="Texture2D" uid="uid://dqhs4kgqc2awt" path="res://Assets/Sprites/Placeholder/attack1.png" id="2_f0jjd"]
+[ext_resource type="Texture2D" uid="uid://cltaffh7c2w7w" path="res://Assets/Sprites/Placeholder/attack2.png" id="3_feqj4"]
+[ext_resource type="Texture2D" uid="uid://1el7ktml3x8i" path="res://Assets/Sprites/Placeholder/attack3.png" id="4_0u0si"]
+[ext_resource type="Texture2D" uid="uid://bau5ifxlripkb" path="res://icon.svg" id="5_0sxeb"]
+[ext_resource type="Script" path="res://Assets/Scripts/Enemy/BossFSM.gd" id="5_gwyc5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jdhgd"]
 radius = 77.0065
@@ -17,20 +16,19 @@ radius = 94.0851
 [sub_resource type="CircleShape2D" id="CircleShape2D_te7ev"]
 radius = 995.013
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nkgi6"]
-shader = ExtResource("2_8jlet")
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uve0j"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d0m37"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_4qa8l")
+"texture": ExtResource("2_f0jjd")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_w86s6")
+"texture": ExtResource("3_feqj4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_qln4e")
+"texture": ExtResource("4_0u0si")
 }],
 "loop": true,
 "name": &"Attack",
@@ -38,7 +36,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_j3kng")
+"texture": ExtResource("5_0sxeb")
 }],
 "loop": true,
 "name": &"Damaged",
@@ -46,7 +44,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_j3kng")
+"texture": ExtResource("5_0sxeb")
 }],
 "loop": true,
 "name": &"Dead",
@@ -54,7 +52,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_j3kng")
+"texture": ExtResource("5_0sxeb")
 }],
 "loop": true,
 "name": &"Idle",
@@ -62,7 +60,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_j3kng")
+"texture": ExtResource("5_0sxeb")
 }],
 "loop": true,
 "name": &"Walk",
@@ -320,7 +318,7 @@ _data = {
 radius = 64.0
 height = 128.0
 
-[node name="BasicEnemy" type="CharacterBody2D" groups=["Enemy"]]
+[node name="Boss" type="CharacterBody2D" groups=["Enemy"]]
 light_mask = 2
 visibility_layer = 2
 z_index = 2
@@ -329,7 +327,7 @@ collision_mask = 2
 motion_mode = 1
 wall_min_slide_angle = 0.0
 safe_margin = 0.04
-script = ExtResource("1_bissd")
+script = ExtResource("1_oidh0")
 can_attack = false
 
 [node name="Rotate" type="Node2D" parent="."]
@@ -395,7 +393,7 @@ disabled = true
 modulate = Color(1, 0, 0, 1)
 light_mask = 2
 visibility_layer = 2
-material = SubResource("ShaderMaterial_nkgi6")
+material = SubResource("CanvasItemMaterial_uve0j")
 sprite_frames = SubResource("SpriteFrames_d0m37")
 animation = &"Attack"
 
@@ -408,7 +406,7 @@ libraries = {
 shape = SubResource("CapsuleShape2D_h8uqc")
 
 [node name="FiniteStateMachine" type="Node" parent="."]
-script = ExtResource("1_fj8ch")
+script = ExtResource("5_gwyc5")
 
 [node name="Timers" type="Node2D" parent="."]
 

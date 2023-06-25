@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-class_name BasicEnemy
+class_name Boss
 
 """|||||||||||||||||||||||||||||||||||| NODES |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 

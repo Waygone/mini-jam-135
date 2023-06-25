@@ -8,6 +8,11 @@ class_name Player
 
 @onready var damage_area_collision = $DamageArea/CollisionShape2D
 
+@onready var normal_sprite = $Normal
+@onready var disguised_sprite = $Disguised
+
+var save_system
+
 """|||||||||||||||||||||||||||||||||||| VARs |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
 @export var speed = 500.0
@@ -19,6 +24,13 @@ class_name Player
 		return hp
 signal hp_changed(new_hp)
 
+@export var gold = 0.0:
+	set(value):
+		gold = value
+	get:
+		return gold
+signal gold_changed(new_gold)
+
 const FRICTION = 10
 
 
@@ -27,11 +39,15 @@ const FRICTION = 10
 var is_dead = false
 var is_attacking = false
 var is_interacting = false
+var is_disguised = false
 
 """|||||||||||||||||||||||||||||||||||| CALLBACK |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
 func _ready():
 	damage_area_collision.disabled = true
+	disguised_sprite.visible = false
+	
+	save_system = get_tree().get_first_node_in_group("Save")
 
 
 func _physics_process(_delta):
@@ -39,6 +55,16 @@ func _physics_process(_delta):
 	actions_input()
 	move_and_slide()
 	look_at(get_global_mouse_position())
+
+func collect_points(points: int):
+	var levelName = "OneLevel"  # Assuming the level scene name is used as the level identifier
+	var totalPoints = save_system.load_points(levelName)
+	totalPoints += points
+	save_system.save_points(levelName, totalPoints)
+	emit_signal("gold_changed", totalPoints)
+
+func _on_load_save_system_timer_timeout():
+	collect_points(0.0)
 
 """|||||||||||||||||||||||||||||||||||| INPUT |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
@@ -62,11 +88,20 @@ func attack():
 
 func _on_damage_area_body_entered(body):
 	if body.is_in_group("Enemy"):
-		body.take_damage(attack_damage, body.global_position - global_position, 15)
+		body.take_damage(attack_damage, body.global_position - global_position, 25)
 	
 func interact():
 	is_interacting = true
-	
+
+func disguise(is_dis: bool):
+	is_disguised = is_dis
+	normal_sprite.visible = !is_dis
+	disguised_sprite.visible = is_dis
+
+func add_gold(amount):
+	gold += amount
+	emit_signal("gold_changed", gold)
+
 """|||||||||||||||||||||||||||||||||||| HEALTH |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
 func set_hp(new_hp):

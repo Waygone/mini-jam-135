@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bofennc76qhna"]
+[gd_scene load_steps=18 format=3 uid="uid://bofennc76qhna"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Player/Player.gd" id="1_qcmka"]
 [ext_resource type="Texture2D" uid="uid://bau5ifxlripkb" path="res://icon.svg" id="2_7aqug"]
@@ -6,9 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://dqhs4kgqc2awt" path="res://Assets/Sprites/Placeholder/attack1.png" id="3_v6dwi"]
 [ext_resource type="Texture2D" uid="uid://cltaffh7c2w7w" path="res://Assets/Sprites/Placeholder/attack2.png" id="4_upnjx"]
 [ext_resource type="Texture2D" uid="uid://1el7ktml3x8i" path="res://Assets/Sprites/Placeholder/attack3.png" id="5_slfw0"]
+[ext_resource type="Texture2D" uid="uid://c7dhe0dru6cha" path="res://Assets/Sprites/Placeholder/point_light.jpg" id="7_6cbbv"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_22w2r"]
-size = Vector2(127, 127)
+[sub_resource type="CircleShape2D" id="CircleShape2D_wx4lt"]
+radius = 65.5934
 
 [sub_resource type="Animation" id="Animation_jlggy"]
 resource_name = "Attack"
@@ -16,7 +17,7 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/path = NodePath("Normal:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -28,7 +29,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/path = NodePath("Normal:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -61,7 +62,7 @@ resource_name = "Idle"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/path = NodePath("Normal:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -73,7 +74,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/path = NodePath("Normal:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -88,7 +89,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/path = NodePath("Normal:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -100,7 +101,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/path = NodePath("Normal:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -127,7 +128,7 @@ resource_name = "Walk"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/path = NodePath("Normal:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -139,7 +140,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/path = NodePath("Normal:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -220,11 +221,13 @@ animations = [{
 radius = 65.192
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 129
+collision_mask = 129
 script = ExtResource("1_qcmka")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_22w2r")
+shape = SubResource("CircleShape2D_wx4lt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -234,7 +237,13 @@ libraries = {
 [node name="FiniteStateMachine" type="Node" parent="."]
 script = ExtResource("3_jsj1k")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Normal" type="AnimatedSprite2D" parent="."]
+z_index = 4
+sprite_frames = SubResource("SpriteFrames_a8dbl")
+animation = &"Attack"
+
+[node name="Disguised" type="AnimatedSprite2D" parent="."]
+visible = false
 z_index = 4
 sprite_frames = SubResource("SpriteFrames_a8dbl")
 animation = &"Attack"
@@ -247,6 +256,13 @@ input_pickable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
 position = Vector2(47, -36)
 shape = SubResource("CircleShape2D_o26bc")
+
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="LoadSaveSystemTimer" type="Timer" parent="Timers"]
+wait_time = 3.0
+one_shot = true
+autostart = true
 
 [node name="SFX" type="Node2D" parent="."]
 
@@ -261,4 +277,18 @@ position = Vector2(0, -1)
 
 [node name="Attack" type="AudioStreamPlayer2D" parent="SFX"]
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 3.0
+range_item_cull_mask = 14
+shadow_enabled = true
+shadow_item_cull_mask = 14
+texture = ExtResource("7_6cbbv")
+texture_scale = 25.0
+
+[node name="PlayerLight" type="PointLight2D" parent="."]
+shadow_item_cull_mask = 15
+texture = ExtResource("7_6cbbv")
+texture_scale = 4.0
+
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
+[connection signal="timeout" from="Timers/LoadSaveSystemTimer" to="." method="_on_load_save_system_timer_timeout"]
