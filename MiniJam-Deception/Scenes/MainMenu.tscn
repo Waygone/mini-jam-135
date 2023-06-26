@@ -1,4 +1,27 @@
-[gd_scene format=3 uid="uid://dsgq17qm8604k"]
+[gd_scene load_steps=14 format=3 uid="uid://dsgq17qm8604k"]
+
+[ext_resource type="FontFile" uid="uid://bfkfgwlyw3tbo" path="res://Assets/Font/bold-font/Bold-X3RG.ttf" id="1_1gusn"]
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_fek5v"]
+[ext_resource type="AudioStream" uid="uid://glb51y7wog7o" path="res://Assets/Audio/Music/Level 1_MiniJam mast.wav" id="3_xqoe1"]
+[ext_resource type="PackedScene" uid="uid://b2yg5vtcajwdd" path="res://Scenes/Options.tscn" id="4_6dtv6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r003e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a5ekh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cy3gw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ehtwu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ovox2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k0au4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2lwju"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ieljk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rj6e0"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -7,6 +30,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_fek5v")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -23,9 +47,13 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 140.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 100
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("1_1gusn")
+theme_override_font_sizes/font_size = 120
 text = "Disguise Game"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 1
@@ -36,8 +64,11 @@ anchor_bottom = 1.0
 offset_top = -140.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_font_sizes/font_size = 70
-text = "Made for Mini Jam 135: Deception"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("1_1gusn")
+theme_override_font_sizes/font_size = 75
+text = "Made for Mini Jam: Deception"
 horizontal_alignment = 1
 vertical_alignment = 2
 
@@ -57,16 +88,49 @@ grow_vertical = 2
 
 [node name="Start" type="Button" parent="Menu"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("1_1gusn")
 theme_override_font_sizes/font_size = 75
+theme_override_styles/normal = SubResource("StyleBoxEmpty_r003e")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_a5ekh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_cy3gw")
 text = "Start"
 
 [node name="Options" type="Button" parent="Menu"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("1_1gusn")
 theme_override_font_sizes/font_size = 75
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ehtwu")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ovox2")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_k0au4")
 text = "Options"
 
 [node name="Credits" type="Button" parent="Menu"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("1_1gusn")
 theme_override_font_sizes/font_size = 75
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2lwju")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ieljk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rj6e0")
 text = "Credits
 "
+
+[node name="Main Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_xqoe1")
+autoplay = true
+bus = &"Music"
+
+[node name="Options" parent="." instance=ExtResource("4_6dtv6")]
+visible = false
+
+[connection signal="pressed" from="Menu/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Menu/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Menu/Credits" to="." method="_on_credits_pressed"]

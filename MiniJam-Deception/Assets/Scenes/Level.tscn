@@ -29,6 +29,8 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+[ext_resource type="AudioStream" uid="uid://glb51y7wog7o" path="res://Assets/Audio/Music/Level 1_MiniJam mast.wav" id="12_ooidf"]
+[ext_resource type="PackedScene" uid="uid://b2yg5vtcajwdd" path="res://Scenes/Options.tscn" id="13_vc80h"]
 
 [node name="World" type="Node2D"]
 
@@ -193,6 +195,13 @@ visibility_layer = 16
 position = Vector2(340, 715)
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_f3hey")
+[node name="Level1 Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_ooidf")
+autoplay = true
+bus = &"Music"
+
+[node name="Options" parent="." instance=ExtResource("13_vc80h")]
+visible = false
 
 [connection signal="gold_changed" from="Player" to="UI" method="_on_player_gold_changed"]
 [connection signal="hp_changed" from="Player" to="UI" method="_on_player_hp_changed"]

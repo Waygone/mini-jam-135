@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://bm183fmmcaebv"]
+[gd_scene load_steps=2 format=3 uid="uid://bm183fmmcaebv"]
+
+[ext_resource type="Script" path="res://Scripts/Credits.gd" id="1_62gou"]
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_62gou")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -64,7 +67,11 @@ text = "[left][b]	Programming & Level Design[/b]		Waygone
 
 [b]											Sound Design[/b] 		jakethehumanjr
 
-										[b]Art & Animation[/b]		farmdogs[/left]"
+										[b]Art & Animation[/b]		farmdogs
+
+                                        [b]Bold font [/b]by Diogene[/left]"
 fit_content = true
 scroll_active = false
 tab_size = 3
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
