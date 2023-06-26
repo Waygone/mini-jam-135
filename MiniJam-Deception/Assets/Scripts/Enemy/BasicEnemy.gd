@@ -254,7 +254,7 @@ func die():
 		get_tree().get_root().get_node("World/Treasures").add_child(disguise_instance)
 	$Timers/DeathTimer.start()
 	$DeathParticles.set_deferred("emitting", true)
-	$Rotate/AnimatedSprite2D.visible = false
+	$AnimatedSprite2D.visible = false
 	
 
 func _on_death_timer_timeout():

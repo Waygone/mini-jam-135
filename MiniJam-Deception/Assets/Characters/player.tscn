@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bau5ifxlripkb" path="res://sprites/icon.svg" id="2_7aqug"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://cfavu8gg88k5d" path="res://Assets/Sprites/PlayerTree.tres" id="2_k7as6"]
 [ext_resource type="Script" path="res://Assets/Scripts/Player/PlayerFSM.gd" id="3_jsj1k"]
-[ext_resource type="Texture2D" uid="uid://d10ktlovka346" path="res://sprites/character animations/main-character-normal-walk.png" id="3_krrke"]
-[ext_resource type="Texture2D" uid="uid://b73a2fvkvwsl3" path="res://sprites/character animations/main-character-disguised-walk.png" id="5_0tt8g"]
+[ext_resource type="Texture2D" uid="uid://dsgfmfx10cx8h" path="res://sprites/character animations/main-character-normal-walk.png" id="3_krrke"]
+[ext_resource type="Texture2D" uid="uid://b0mxqetuon306" path="res://sprites/character animations/main-character-disguised-walk.png" id="5_0tt8g"]
 [ext_resource type="Texture2D" uid="uid://c7dhe0dru6cha" path="res://Assets/Sprites/Placeholder/point_light.jpg" id="7_6cbbv"]
 [ext_resource type="Texture2D" uid="uid://bqup0fjghn5of" path="res://Assets/Sprites/Placeholder/2d_light.png" id="7_huq42"]
 
