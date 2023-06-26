@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckqqw8adfog6m"
-path="res://.godot/imported/main-character-normal-attack.png-c51e40698e198e9638fb3fe3f3327bfb.ctex"
+uid="uid://c0p4xw1i1qmo1"
+path="res://.godot/imported/main-character-normal-attack.png-cc4c8d129e6024349bb59998e6050f62.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/character animations/main-character-normal-attack.png"
-dest_files=["res://.godot/imported/main-character-normal-attack.png-c51e40698e198e9638fb3fe3f3327bfb.ctex"]
+source_file="res://Sprites/character animations/main-character-normal-attack.png"
+dest_files=["res://.godot/imported/main-character-normal-attack.png-cc4c8d129e6024349bb59998e6050f62.ctex"]
 
 [params]
 

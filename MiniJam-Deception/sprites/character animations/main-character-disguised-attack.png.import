@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy7bae1q1bban"
-path="res://.godot/imported/main-character-disguised-attack.png-86c0422d3f5262ea80d15e8a1a5d16e4.ctex"
+uid="uid://bc1l71h0uud2j"
+path="res://.godot/imported/main-character-disguised-attack.png-3ce0b061fba990d1b5ad22a7a44f12c7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/character animations/main-character-disguised-attack.png"
-dest_files=["res://.godot/imported/main-character-disguised-attack.png-86c0422d3f5262ea80d15e8a1a5d16e4.ctex"]
+source_file="res://Sprites/character animations/main-character-disguised-attack.png"
+dest_files=["res://.godot/imported/main-character-disguised-attack.png-3ce0b061fba990d1b5ad22a7a44f12c7.ctex"]
 
 [params]
 
