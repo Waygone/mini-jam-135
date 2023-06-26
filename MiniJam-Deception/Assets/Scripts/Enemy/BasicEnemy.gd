@@ -255,7 +255,9 @@ func die():
 	$Timers/DeathTimer.start()
 	$DeathParticles.set_deferred("emitting", true)
 	$AnimatedSprite2D.visible = false
-	
+	$Die.play()
+
+
 
 func _on_death_timer_timeout():
 	queue_free()

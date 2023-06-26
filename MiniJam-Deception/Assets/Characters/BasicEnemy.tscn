@@ -5,6 +5,16 @@
 [ext_resource type="Texture2D" uid="uid://dxua648h55ty5" path="res://sprites/character animations/skeleton-basic-enemy-attack.png" id="2_4hn5f"]
 [ext_resource type="Texture2D" uid="uid://jbt1jy1ko2m4" path="res://sprites/character animations/skeleton-basic-enemy-walk.png" id="6_rr4b0"]
 [ext_resource type="Texture2D" uid="uid://dg25e1583fsv2" path="res://Assets/Sprites/Placeholder/white.png" id="7_4be5s"]
+[ext_resource type="AudioStream" uid="uid://cku3a7u6xyuo4" path="res://Assets/Audio/SFX/Skele Die_SFX__MiniJam.wav" id="8_afu3l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jdhgd"]
+radius = 77.0065
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5odxu"]
+radius = 94.0851
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_te7ev"]
+radius = 995.013
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nkgi6"]
 
@@ -1423,6 +1433,9 @@ angle_max = 360.0
 scale_amount_min = 0.05
 scale_amount_max = 0.1
 color = Color(0.745098, 0.745098, 0.745098, 1)
+[node name="Die" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_afu3l")
+bus = &"SFX"
 
 [connection signal="body_entered" from="Rotate/Area2Ds/DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_entered" from="Rotate/Area2Ds/AttackDetectionArea" to="." method="_on_attack_area_body_entered"]

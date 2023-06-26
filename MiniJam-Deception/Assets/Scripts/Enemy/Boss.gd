@@ -234,6 +234,7 @@ func die():
 	$CollisionShape2D.set_deferred("disabled", true)
 	var disguise_instance = disguise_scene.instantiate()
 	add_child(disguise_instance)
+	$Die.play()
 
 
 

@@ -89,7 +89,6 @@ func movement_input(delta):
 	
 	var desired_vel = move_dir * speed
 	var steering = (desired_vel - velocity) * delta * FRICTION
-	
 	velocity += steering
 	
 func actions_input():
@@ -116,6 +115,7 @@ func disguise(is_dis: bool):
 	disguised_sprite.visible = is_dis
 
 func add_gold(amount):
+	$GetTreasure.play()
 	gold += amount
 	collect_points(amount)
 	#emit_signal("gold_changed", gold)
@@ -128,7 +128,7 @@ func set_hp(new_hp):
 	
 
 func take_damage(damage, push_direction, force):
-	
+	$GotHit.play()
 	velocity += push_direction * force
 	move_and_slide()
 	
@@ -139,6 +139,6 @@ func take_damage(damage, push_direction, force):
 	
 
 func die():
-	#FX FOR DEATH
+	$PlayerDie.play()
 	pass
 

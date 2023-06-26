@@ -27,6 +27,8 @@ func _get_transition():
 				
 			elif parent.velocity.length() > 15 || parent.velocity.y >= 10:
 				#get_parent().get_node("SoundFX/Walk").playing = true
+			elif parent.velocity.length() > 15 || parent.velocity.y != 0:
+				$"../Step".play()
 				return states.Walk
 				
 		states.Walk:
