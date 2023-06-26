@@ -23,7 +23,7 @@ func _get_transition():
 				return states.Attack
 				
 			elif parent.velocity.length() > 15 || parent.velocity.y != 0:
-				#get_parent().get_node("SoundFX/Walk").playing = true
+				$"../Step".play()
 				return states.Walk
 				
 		states.Walk:
@@ -58,7 +58,7 @@ func _get_transition():
 			
 	return -1
 
-func _enter_state(_previous_state, new_state):
+func _enter_state(previous_state, new_state):
 	match new_state:
 		states.Idle:
 			animation_player.play("Idle")

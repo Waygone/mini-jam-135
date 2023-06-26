@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://du76st4c5ioh0"]
+[gd_scene load_steps=22 format=3 uid="uid://du76st4c5ioh0"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Enemy/BasicEnemy.gd" id="1_bissd"]
 [ext_resource type="Script" path="res://Assets/Scripts/Enemy/BasicEnemyFSM.gd" id="1_fj8ch"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" path="res://Assets/Shaders/BasicEnemy.gdshader" id="2_8jlet"]
 [ext_resource type="Texture2D" uid="uid://cltaffh7c2w7w" path="res://Assets/Sprites/Placeholder/attack2.png" id="3_w86s6"]
 [ext_resource type="Texture2D" uid="uid://1el7ktml3x8i" path="res://Assets/Sprites/Placeholder/attack3.png" id="4_qln4e"]
+[ext_resource type="AudioStream" uid="uid://cku3a7u6xyuo4" path="res://Assets/Audio/SFX/Skele Die_SFX__MiniJam.wav" id="8_afu3l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jdhgd"]
 radius = 77.0065
@@ -428,6 +429,10 @@ one_shot = true
 target_desired_distance = 100.0
 path_postprocessing = 1
 debug_enabled = true
+
+[node name="Die" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_afu3l")
+bus = &"SFX"
 
 [connection signal="body_entered" from="Rotate/Area2Ds/DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_entered" from="Rotate/Area2Ds/AttackDetectionArea" to="." method="_on_attack_area_body_entered"]

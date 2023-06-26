@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dsgq17qm8604k"]
+[gd_scene load_steps=15 format=3 uid="uid://dsgq17qm8604k"]
 
 [ext_resource type="FontFile" uid="uid://bfkfgwlyw3tbo" path="res://Assets/Font/bold-font/Bold-X3RG.ttf" id="1_1gusn"]
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_fek5v"]
 [ext_resource type="AudioStream" uid="uid://glb51y7wog7o" path="res://Assets/Audio/Music/Level 1_MiniJam mast.wav" id="3_xqoe1"]
 [ext_resource type="PackedScene" uid="uid://b2yg5vtcajwdd" path="res://Scenes/Options.tscn" id="4_6dtv6"]
+[ext_resource type="PackedScene" uid="uid://bm183fmmcaebv" path="res://Scenes/Credits.tscn" id="5_hkx23"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r003e"]
 
@@ -129,6 +130,9 @@ autoplay = true
 bus = &"Music"
 
 [node name="Options" parent="." instance=ExtResource("4_6dtv6")]
+visible = false
+
+[node name="Credits" parent="." instance=ExtResource("5_hkx23")]
 visible = false
 
 [connection signal="pressed" from="Menu/Start" to="." method="_on_start_pressed"]
