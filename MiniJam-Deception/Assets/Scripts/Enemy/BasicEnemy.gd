@@ -20,9 +20,12 @@ enum{
 @onready var could_not_reach_timer = $Timers/CouldNotReachPlayer
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 
+@onready var animation_tree = $AnimationTree
+@onready var animation_state = animation_tree["parameters/playback"]
+
 """|||||||||||||||||||||||||||||||||||| VARs |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
-@export var speed = 100.0
+@export var speed = 130.0
 
 @export var hp = 100:
 	set(value):
@@ -56,11 +59,15 @@ var is_attacking = false
 var is_roaming = false
 @export var can_attack = true
 
+var is_ready = false
+
 var player_detected = false
 
 """|||||||||||||||||||||||||||||||||||| CALLBACK |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
 func _ready():
+	animation_tree.active = true
+	
 	damage_area_collision.disabled = true
 	alert_enemies_collision.disabled = true
 	attack_area_collision.disabled = false
@@ -78,22 +85,30 @@ func _ready():
 	random_num = rng.randf()
 	
 	roam()
+	
+	is_ready = true
 
 
 func _process(_delta):
-	detect_player()
+	if !is_dead:
+		detect_player()
 
 func _physics_process(_delta):
-	movement_handler()
+	if !is_dead:
+		movement_handler()
 
 """|||||||||||||||||||||||||||||||||||| HANDLERS |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
 func movement_handler():
 	var move_direction = to_local(nav_agent.get_next_path_position()).normalized()
 
+	if move_direction != Vector2.ZERO:
+		animation_tree.set("parameters/Attack/blend_position", move_direction)
+		animation_tree.set("parameters/Idle/blend_position", move_direction)
+		animation_tree.set("parameters/Walk/blend_position", move_direction)
 
 	#var steering = (desired_vel - velocity) * delta * 5
-	velocity = move_direction * speed if player_detected else move_direction * speed / 2.5
+	velocity = move_direction * speed if player_detected else move_direction * speed / 3
 	move_and_slide()
 	
 	#$Rotate.look_at(nav_agent.target_position)
@@ -169,7 +184,6 @@ func _on_alert_other_enemy_body_entered(body):
 	
 func _on_attack_area_body_entered(body):
 	if body.is_in_group("Player"):
-		body.disguise(false)
 		attack()
 
 func _on_attack_area_body_exited(body):
@@ -179,6 +193,7 @@ func _on_attack_area_body_exited(body):
 func _on_damage_area_body_entered(body):
 	if body.is_in_group("Player"):
 		body.take_damage(damage, body.global_position - global_position, 10)
+		body.disguise(false)
 	
 
 """|||||||||||||||||||||||||||||||||||| ACTIONS |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
@@ -232,23 +247,15 @@ func take_damage(dmg, push_direction, force):
 
 func die():
 	$CollisionShape2D.set_deferred("disabled", true)
-	var disguise_instance = disguise_scene.instantiate()
-	add_child(disguise_instance)
+	alert_other_enemies(true)
+	if !player.is_disguised:
+		var disguise_instance = disguise_scene.instantiate()
+		disguise_instance.global_position = global_position
+		get_tree().get_root().get_node("World/Treasures").add_child(disguise_instance)
+	$Timers/DeathTimer.start()
+	$DeathParticles.set_deferred("emitting", true)
+	$AnimatedSprite2D.visible = false
+	
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+func _on_death_timer_timeout():
+	queue_free()

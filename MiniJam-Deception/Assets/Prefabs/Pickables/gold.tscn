@@ -1,9 +1,79 @@
-[gd_scene load_steps=3 format=3 uid="uid://dph2c466mry5v"]
+[gd_scene load_steps=10 format=3 uid="uid://dph2c466mry5v"]
 
 [ext_resource type="PackedScene" uid="uid://cfos036fvag1d" path="res://Assets/Prefabs/Pickable.tscn" id="1_teioc"]
 [ext_resource type="Script" path="res://Assets/Scripts/Pickables/gold.gd" id="2_8cy1y"]
+[ext_resource type="Texture2D" uid="uid://s6sitadk15on" path="res://sprites/tileset.png" id="3_7yos7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ch5s"]
+atlas = ExtResource("3_7yos7")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_afm0n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ch5s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pg503"]
+radius = 7.00793
+
+[sub_resource type="Animation" id="Animation_i5e45"]
+resource_name = "Default"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 3.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -3), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_muq78"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6oayi"]
+_data = {
+"Default": SubResource("Animation_i5e45"),
+"RESET": SubResource("Animation_muq78")
+}
 
 [node name="Gold" instance=ExtResource("1_teioc")]
+z_index = 2
+scale = Vector2(3, 3)
 script = ExtResource("2_8cy1y")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_afm0n")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_pg503")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_6oayi")
+}
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

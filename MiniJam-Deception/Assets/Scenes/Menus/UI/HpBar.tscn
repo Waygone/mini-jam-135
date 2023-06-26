@@ -11,6 +11,6 @@ anchors_preset = 0
 layout_mode = 0
 offset_right = 918.0
 offset_bottom = 440.0
-scale = Vector2(0.15, 0.15)
+scale = Vector2(0.25, 0.25)
 texture_under = ExtResource("1_nlaea")
 texture_progress = ExtResource("2_uea2x")
