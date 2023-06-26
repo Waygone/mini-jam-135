@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxnwyqyp1s6l2"
-path="res://.godot/imported/jungle-wall-vines.png-1c3f2ece92a7109237c92843fd399f94.ctex"
+uid="uid://ja3cp7txfr5p"
+path="res://.godot/imported/skeleton-king-boss-attack.png-4e8a7e07e515b979161624c81a702157.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/jungle-wall-vines.png"
-dest_files=["res://.godot/imported/jungle-wall-vines.png-1c3f2ece92a7109237c92843fd399f94.ctex"]
+source_file="res://Sprites/character animations/skeleton-king-boss-attack.png"
+dest_files=["res://.godot/imported/skeleton-king-boss-attack.png-4e8a7e07e515b979161624c81a702157.ctex"]
 
 [params]
 

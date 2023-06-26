@@ -10,4 +10,4 @@ func _on_options_pressed():
 
 
 func _on_credits_pressed():
-	get_tree().change_scene_to_file("res://Scenes/Credits.tscn")
+	$Credits.visible = true
