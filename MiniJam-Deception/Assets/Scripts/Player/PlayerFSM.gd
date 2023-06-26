@@ -22,7 +22,7 @@ func _get_transition():
 			if parent.is_attacking:
 				return states.Attack
 				
-			elif parent.velocity.length() > 15 || parent.velocity.y != 0:
+			elif parent.velocity.length() > 15 || parent.velocity.y >= 10:
 				#get_parent().get_node("SoundFX/Walk").playing = true
 				return states.Walk
 				
@@ -30,7 +30,7 @@ func _get_transition():
 			if parent.is_attacking:
 				return states.Attack
 			
-			elif parent.velocity.length() < 15 && parent.velocity.y == 0:
+			elif parent.velocity.length() < 15 && parent.velocity.y < 10:
 				#get_parent().get_node("SoundFX/Walk").playing = false
 				return states.Idle
 		
@@ -59,15 +59,25 @@ func _get_transition():
 	return -1
 
 func _enter_state(_previous_state, new_state):
-	match new_state:
-		states.Idle:
-			animation_player.play("Idle")
-		states.Walk:
-			animation_player.play("Walk")
-		states.Attack:
-			animation_player.play("Attack")
-		states.Damaged:
-			animation_player.play("Damaged")
-		states.Dead:
-			animation_player.play("Dead")
+	if parent.is_ready:
+		match new_state:
+			states.Idle:
+				#animation_player.play("Idle")
+				parent.animation_state.travel("Idle")
+				
+				print("idle")
+			states.Walk:
+				#animation_player.play("Walk_L")
+				parent.animation_state.travel("Walk")
+				print("walk")
+			states.Attack:
+				#animation_player.play("Attack")
+				parent.animation_state.travel("Attack")
+				print("at")
+			states.Damaged:
+				#animation_player.play("Damaged")
+				parent.animation_state.travel("Damaged")
+			states.Dead:
+				#animation_player.play("Dead")
+				parent.animation_state.travel("Dead")
 			

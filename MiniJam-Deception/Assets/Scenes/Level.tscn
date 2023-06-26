@@ -53,10 +53,12 @@ position = Vector2(804, 410)
 
 [node name="Player" parent="." instance=ExtResource("1_2r152")]
 position = Vector2(162, -727)
-scale = Vector2(0.17, 0.17)
+speed = 200.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-scale = Vector2(5, 5)
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2(470, -19)

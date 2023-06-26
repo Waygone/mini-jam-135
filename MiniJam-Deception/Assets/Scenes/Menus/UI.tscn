@@ -10,3 +10,18 @@ script = ExtResource("1_nd0qy")
 [node name="HpBar" parent="." instance=ExtResource("2_6yd86")]
 
 [node name="Counter" parent="." instance=ExtResource("3_7rkba")]
+offset_left = -137.0
+offset_right = -77.0
+offset_bottom = 60.0
+scale = Vector2(2, 2)
+
+[node name="Sprite" parent="Counter" index="0"]
+position = Vector2(-21.4786, 34.5213)
+
+[node name="CounterText" parent="Counter" index="1"]
+offset_left = -63.4786
+offset_top = 18.5213
+offset_right = -13.4786
+offset_bottom = 48.5213
+
+[editable path="Counter"]

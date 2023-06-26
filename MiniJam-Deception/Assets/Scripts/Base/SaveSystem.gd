@@ -1,5 +1,11 @@
 extends Node
 
+@export var level = 0
+
+func _ready():
+	if level == 0:
+		save_points("One", 0)
+
 func save_points(level_name: String, points: int):
 	var save_file = FileAccess.open("user://save_game.dat", FileAccess.WRITE)
 	save_file.store_line(level_name + "=" + str(points))
@@ -9,7 +15,7 @@ func load_points(level_name: String) -> int:
 	var save_file = FileAccess.open("user://save_game.dat", FileAccess.READ)
 	
 	if FileAccess.file_exists("user://save_game.dat"):
-		save_file.open("user://save_game.dat", FileAccess.READ)
+		FileAccess.open("user://save_game.dat", FileAccess.READ)
 		while !save_file.eof_reached():
 			var line = save_file.get_line().strip_edges()
 			print(line)

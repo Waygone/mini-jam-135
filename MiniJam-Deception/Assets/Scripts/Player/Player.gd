@@ -11,6 +11,9 @@ class_name Player
 @onready var normal_sprite = $Normal
 @onready var disguised_sprite = $Disguised
 
+@onready var animation_tree = $AnimationTree
+@onready var animation_state = animation_tree["parameters/playback"]
+
 var save_system
 
 """|||||||||||||||||||||||||||||||||||| VARs |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
@@ -41,6 +44,11 @@ var is_attacking = false
 var is_interacting = false
 var is_disguised = false
 
+var is_moving = false
+var idle = true
+
+var is_ready = false
+
 """|||||||||||||||||||||||||||||||||||| CALLBACK |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
 func _ready():
@@ -48,7 +56,9 @@ func _ready():
 	disguised_sprite.visible = false
 	
 	save_system = get_tree().get_first_node_in_group("Save")
-
+	animation_tree.active = true
+	is_ready = true
+	
 func _process(delta):
 	stopwatch += delta
 
@@ -56,7 +66,6 @@ func _physics_process(_delta):
 	movement_input(_delta)
 	actions_input()
 	move_and_slide()
-	look_at(get_global_mouse_position())
 
 func collect_points(points: int):
 	var levelName = "One"  # Assuming the level scene name is used as the level identifier
@@ -72,6 +81,11 @@ func _on_load_save_system_timer_timeout():
 
 func movement_input(delta):
 	var move_dir = Input.get_vector("left", "right", "up", "down")
+	
+	if move_dir != Vector2.ZERO:
+		animation_tree.set("parameters/Idle/blend_position", move_dir)
+		animation_tree.set("parameters/Walk/blend_position", move_dir)
+	
 	var desired_vel = move_dir * speed
 	var steering = (desired_vel - velocity) * delta * FRICTION
 	
@@ -82,7 +96,7 @@ func actions_input():
 		attack()
 	if(Input.is_action_just_pressed("interact")):
 		interact()
-	
+
 """|||||||||||||||||||||||||||||||||||| ACTIONS |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
 func attack():
