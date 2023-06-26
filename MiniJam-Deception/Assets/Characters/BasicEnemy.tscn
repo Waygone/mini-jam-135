@@ -1,4 +1,4 @@
-[gd_scene load_steps=110 format=3 uid="uid://du76st4c5ioh0"]
+[gd_scene load_steps=115 format=3 uid="uid://du76st4c5ioh0"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Enemy/BasicEnemy.gd" id="1_bissd"]
 [ext_resource type="Script" path="res://Assets/Scripts/Enemy/BasicEnemyFSM.gd" id="1_fj8ch"]
@@ -238,6 +238,11 @@ region = Rect2(80, 0, 20, 31)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d0m37"]
 animations = [{
+"frames": [],
+"loop": true,
+"name": &"Attack",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hfwyt")
@@ -481,7 +486,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jdhgd"]
-radius = 22.0227
+radius = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5odxu"]
 radius = 24.0208
@@ -522,7 +527,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Rotate/Area2Ds/DamageArea/CollisionShape2D:disabled")
+tracks/2/path = NodePath("Area2Ds/DamageArea/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -546,7 +551,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Rotate/Area2Ds/AttackDetectionArea/CollisionShape2D:disabled")
+tracks/4/path = NodePath("Area2Ds/AttackDetectionArea/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -586,7 +591,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Rotate/Area2Ds/DamageArea/CollisionShape2D:disabled")
+tracks/2/path = NodePath("Area2Ds/DamageArea/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -610,7 +615,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Rotate/Area2Ds/AttackDetectionArea/CollisionShape2D:disabled")
+tracks/4/path = NodePath("Area2Ds/AttackDetectionArea/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -650,7 +655,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Rotate/Area2Ds/DamageArea/CollisionShape2D:disabled")
+tracks/2/path = NodePath("Area2Ds/DamageArea/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -674,7 +679,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Rotate/Area2Ds/AttackDetectionArea/CollisionShape2D:disabled")
+tracks/4/path = NodePath("Area2Ds/AttackDetectionArea/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -714,7 +719,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Rotate/Area2Ds/DamageArea/CollisionShape2D:disabled")
+tracks/2/path = NodePath("Area2Ds/DamageArea/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -738,7 +743,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Rotate/Area2Ds/AttackDetectionArea/CollisionShape2D:disabled")
+tracks/4/path = NodePath("Area2Ds/AttackDetectionArea/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -968,7 +973,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Rotate/Area2Ds/DamageArea/CollisionShape2D:disabled")
+tracks/2/path = NodePath("Area2Ds/DamageArea/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -992,7 +997,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Rotate/Area2Ds/AttackDetectionArea/CollisionShape2D:disabled")
+tracks/4/path = NodePath("Area2Ds/AttackDetectionArea/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1009,7 +1014,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Rotate/Area2Ds/DamageArea/CollisionShape2D:disabled")
+tracks/0/path = NodePath("Area2Ds/DamageArea/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1050,7 +1055,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Rotate/Area2Ds/DamageArea/CollisionShape2D:disabled")
+tracks/0/path = NodePath("Area2Ds/DamageArea/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1091,7 +1096,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Rotate/Area2Ds/DamageArea/CollisionShape2D:disabled")
+tracks/0/path = NodePath("Area2Ds/DamageArea/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1132,7 +1137,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Rotate/Area2Ds/DamageArea/CollisionShape2D:disabled")
+tracks/0/path = NodePath("Area2Ds/DamageArea/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1209,6 +1214,9 @@ blend_point_3/pos = Vector2(1, 0)
 blend_mode = 1
 sync = true
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c7rjn"]
+animation = &"Damaged"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_774jd"]
 animation = &"Idle_D"
 
@@ -1263,28 +1271,45 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wah6o"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jplk5"]
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gevwe"]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lib72"]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k8nug"]
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sgshe"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_376cp"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_80785"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hfn8a"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q63au"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fue6v"]
 states/Attack/node = SubResource("AnimationNodeBlendSpace2D_3mltp")
-states/Attack/position = Vector2(753, 100)
+states/Attack/position = Vector2(663, 46)
+states/Damaged/node = SubResource("AnimationNodeAnimation_c7rjn")
+states/Damaged/position = Vector2(477, -72)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_8riy8")
 states/Idle/position = Vector2(366, 92)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_cg4hh")
-states/Walk/position = Vector2(524, 172)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_b3jsa"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_wah6o"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_jplk5"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_gevwe"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_lib72"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_k8nug"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_sgshe")]
+states/Walk/position = Vector2(514, 171)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_b3jsa"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_wah6o"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_jplk5"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_gevwe"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_lib72"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_k8nug"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_sgshe"), "Walk", "Damaged", SubResource("AnimationNodeStateMachineTransition_376cp"), "Attack", "Damaged", SubResource("AnimationNodeStateMachineTransition_80785"), "Idle", "Damaged", SubResource("AnimationNodeStateMachineTransition_hfn8a"), "Damaged", "Walk", SubResource("AnimationNodeStateMachineTransition_q63au")]
+graph_offset = Vector2(-144, -55)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_nk4k1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h8uqc"]
-height = 40.0
+radius = 12.0
+height = 48.0
 
 [node name="BasicEnemy" type="CharacterBody2D" groups=["Enemy"]]
 light_mask = 2
@@ -1296,7 +1321,6 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 safe_margin = 0.04
 script = ExtResource("1_bissd")
-can_attack = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 light_mask = 2
@@ -1304,6 +1328,37 @@ visibility_layer = 2
 material = SubResource("ShaderMaterial_nkgi6")
 sprite_frames = SubResource("SpriteFrames_d0m37")
 animation = &"Attack"
+
+[node name="Area2Ds" type="Node2D" parent="."]
+
+[node name="DamageArea" type="Area2D" parent="Area2Ds"]
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/DamageArea"]
+shape = SubResource("CircleShape2D_jdhgd")
+debug_color = Color(0.980392, 0, 0.505882, 0.419608)
+
+[node name="AttackDetectionArea" type="Area2D" parent="Area2Ds"]
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/AttackDetectionArea"]
+shape = SubResource("CircleShape2D_5odxu")
+disabled = true
+
+[node name="PlayerDetectionArea" type="Area2D" parent="Area2Ds"]
+input_pickable = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/PlayerDetectionArea"]
+shape = SubResource("CircleShape2D_5f1p8")
+
+[node name="AlertOtherEnemy" type="Area2D" parent="Area2Ds"]
+visible = false
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/AlertOtherEnemy"]
+shape = SubResource("CircleShape2D_te7ev")
+disabled = true
 
 [node name="Rotate" type="Node2D" parent="."]
 
@@ -1329,37 +1384,6 @@ target_position = Vector2(121, -12)
 
 [node name="RayCast2D7" type="RayCast2D" parent="Rotate/Raycasts"]
 target_position = Vector2(119, 22)
-
-[node name="Area2Ds" type="Node2D" parent="Rotate"]
-
-[node name="DamageArea" type="Area2D" parent="Rotate/Area2Ds"]
-input_pickable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rotate/Area2Ds/DamageArea"]
-shape = SubResource("CircleShape2D_jdhgd")
-debug_color = Color(0.980392, 0, 0.505882, 0.419608)
-
-[node name="AttackDetectionArea" type="Area2D" parent="Rotate/Area2Ds"]
-input_pickable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rotate/Area2Ds/AttackDetectionArea"]
-modulate = Color(1, 0, 1, 1)
-shape = SubResource("CircleShape2D_5odxu")
-disabled = true
-
-[node name="PlayerDetectionArea" type="Area2D" parent="Rotate/Area2Ds"]
-input_pickable = false
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rotate/Area2Ds/PlayerDetectionArea"]
-shape = SubResource("CircleShape2D_5f1p8")
-
-[node name="AlertOtherEnemy" type="Area2D" parent="Rotate/Area2Ds"]
-input_pickable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rotate/Area2Ds/AlertOtherEnemy"]
-shape = SubResource("CircleShape2D_te7ev")
-disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1402,7 +1426,6 @@ one_shot = true
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 target_desired_distance = 100.0
 path_postprocessing = 1
-debug_enabled = true
 
 [node name="DeathParticles" type="CPUParticles2D" parent="."]
 emitting = false
@@ -1424,11 +1447,11 @@ scale_amount_min = 0.05
 scale_amount_max = 0.1
 color = Color(0.745098, 0.745098, 0.745098, 1)
 
-[connection signal="body_entered" from="Rotate/Area2Ds/DamageArea" to="." method="_on_damage_area_body_entered"]
-[connection signal="body_entered" from="Rotate/Area2Ds/AttackDetectionArea" to="." method="_on_attack_area_body_entered"]
-[connection signal="body_exited" from="Rotate/Area2Ds/AttackDetectionArea" to="." method="_on_attack_area_body_exited"]
-[connection signal="body_entered" from="Rotate/Area2Ds/PlayerDetectionArea" to="." method="_on_detection_area_body_entered"]
-[connection signal="body_entered" from="Rotate/Area2Ds/AlertOtherEnemy" to="." method="_on_alert_other_enemy_body_entered"]
+[connection signal="body_entered" from="Area2Ds/DamageArea" to="." method="_on_damage_area_body_entered"]
+[connection signal="body_entered" from="Area2Ds/AttackDetectionArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="Area2Ds/AttackDetectionArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="body_entered" from="Area2Ds/PlayerDetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_entered" from="Area2Ds/AlertOtherEnemy" to="." method="_on_alert_other_enemy_body_entered"]
 [connection signal="animation_finished" from="AnimationTree" to="FiniteStateMachine" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_started" from="AnimationTree" to="FiniteStateMachine" method="_on_animation_tree_animation_started"]
 [connection signal="timeout" from="Timers/AttackRate" to="." method="_on_attack_rate_timeout"]

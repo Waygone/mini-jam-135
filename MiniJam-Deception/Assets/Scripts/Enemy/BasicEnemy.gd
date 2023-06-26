@@ -8,14 +8,14 @@ class_name BasicEnemy
 enum{
 	Idle,
 	Walk,
-	Attack,
+	Attackasdf,
 	Damaged,
 }
 
 
-@onready var damage_area_collision = $Rotate/Area2Ds/DamageArea/CollisionShape2D
-@onready var attack_area_collision = $Rotate/Area2Ds/AttackDetectionArea/CollisionShape2D
-@onready var alert_enemies_collision = $Rotate/Area2Ds/AlertOtherEnemy/CollisionShape2D
+@onready var damage_area_collision = $Area2Ds/DamageArea/CollisionShape2D
+@onready var attack_area_collision = $Area2Ds/AttackDetectionArea/CollisionShape2D
+@onready var alert_enemies_collision = $Area2Ds/AlertOtherEnemy/CollisionShape2D
 @onready var attack_rate_timer = $Timers/AttackRate
 @onready var could_not_reach_timer = $Timers/CouldNotReachPlayer
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
@@ -25,16 +25,16 @@ enum{
 
 """|||||||||||||||||||||||||||||||||||| VARs |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
-@export var speed = 130.0
+@export var speed = 80.0
 
-@export var hp = 100:
+@export var hp = 40:
 	set(value):
 		hp = value
 	get:
 		return hp
-@export var damage = 10.0
+@export var damage = 5.0
 
-@export var attack_rate = 0.8
+@export var attack_rate = 0.9
 @export var max_time_reach = 20.0
 
 @export var drops_disguise = false
@@ -57,7 +57,7 @@ var random_num
 var is_dead = false
 var is_attacking = false
 var is_roaming = false
-@export var can_attack = true
+var can_attack = true
 
 var is_ready = false
 
@@ -90,6 +90,7 @@ func _ready():
 
 
 func _process(_delta):
+	print(state_machine.state)
 	if !is_dead:
 		detect_player()
 
@@ -142,6 +143,8 @@ func _on_navigation_timer_timeout():
 		if !is_roaming:
 			player_detected = false
 			roam()
+	else:
+		create_path(global_position)
 
 	
 func get_circle_position(random):
@@ -168,9 +171,11 @@ func detect_player():
 
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("Player"):
-		if !body.is_disguised:
-			player_detected = true
-			alert_other_enemies(true)
+		player_detected = true
+		alert_other_enemies(true)
+#		if !body.is_disguised:
+#			player_detected = true
+#			alert_other_enemies(true)
 		
 func alert_other_enemies(alert):
 	alert_enemies_collision.set_deferred("disabled", !alert)

@@ -38,6 +38,7 @@ func _get_transition():
 		
 		states.Attack:
 			if stoped_attacking:
+				
 				parent.start_attack_timer()
 				return states.Idle
 

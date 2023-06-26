@@ -14,6 +14,8 @@ class_name Player
 @onready var animation_tree = $AnimationTree
 @onready var animation_state = animation_tree["parameters/playback"]
 
+
+@onready var starting_point = global_position
 var save_system
 
 """|||||||||||||||||||||||||||||||||||| VARs |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
