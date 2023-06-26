@@ -20,7 +20,7 @@ var save_system
 
 """|||||||||||||||||||||||||||||||||||| VARs |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
-@export var speed = 300.0
+@export var speed = 150.0
 @export var attack_damage = 10.0
 @export var hp = 100:
 	set(value):

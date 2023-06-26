@@ -25,9 +25,9 @@ func _get_transition():
 			if parent.is_attacking:
 				return states.Attack
 				
-			elif parent.velocity.length() > 15 || parent.velocity.y >= 10:
+			#elif parent.velocity.length() > 15 || parent.velocity.y >= 10:
 				#get_parent().get_node("SoundFX/Walk").playing = true
-			elif parent.velocity.length() > 15 || parent.velocity.y != 0:
+			elif parent.velocity.length() > 15 || parent.velocity.y < 10:
 				$"../Step".play()
 				return states.Walk
 				
