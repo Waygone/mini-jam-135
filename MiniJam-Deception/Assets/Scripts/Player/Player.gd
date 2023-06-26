@@ -83,6 +83,7 @@ func movement_input(delta):
 	var move_dir = Input.get_vector("left", "right", "up", "down")
 	
 	if move_dir != Vector2.ZERO:
+		animation_tree.set("parameters/Attack/blend_position", move_dir)
 		animation_tree.set("parameters/Idle/blend_position", move_dir)
 		animation_tree.set("parameters/Walk/blend_position", move_dir)
 	

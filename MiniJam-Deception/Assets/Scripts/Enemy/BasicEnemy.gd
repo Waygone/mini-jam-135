@@ -20,9 +20,12 @@ enum{
 @onready var could_not_reach_timer = $Timers/CouldNotReachPlayer
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 
+@onready var animation_tree = $AnimationTree
+@onready var animation_state = animation_tree["parameters/playback"]
+
 """|||||||||||||||||||||||||||||||||||| VARs |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
-@export var speed = 250.0
+@export var speed = 130.0
 
 @export var hp = 100:
 	set(value):
@@ -56,11 +59,15 @@ var is_attacking = false
 var is_roaming = false
 @export var can_attack = true
 
+var is_ready = false
+
 var player_detected = false
 
 """|||||||||||||||||||||||||||||||||||| CALLBACK |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
 func _ready():
+	animation_tree.active = true
+	
 	damage_area_collision.disabled = true
 	alert_enemies_collision.disabled = true
 	attack_area_collision.disabled = false
@@ -78,6 +85,8 @@ func _ready():
 	random_num = rng.randf()
 	
 	roam()
+	
+	is_ready = true
 
 
 func _process(_delta):
@@ -93,9 +102,13 @@ func _physics_process(_delta):
 func movement_handler():
 	var move_direction = to_local(nav_agent.get_next_path_position()).normalized()
 
+	if move_direction != Vector2.ZERO:
+		animation_tree.set("parameters/Attack/blend_position", move_direction)
+		animation_tree.set("parameters/Idle/blend_position", move_direction)
+		animation_tree.set("parameters/Walk/blend_position", move_direction)
 
 	#var steering = (desired_vel - velocity) * delta * 5
-	velocity = move_direction * speed if player_detected else move_direction * speed / 2.5
+	velocity = move_direction * speed if player_detected else move_direction * speed / 3
 	move_and_slide()
 	
 	#$Rotate.look_at(nav_agent.target_position)

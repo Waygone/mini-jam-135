@@ -64,48 +64,39 @@ position_smoothing_speed = 10.0
 position = Vector2(470, -19)
 
 [node name="Boss" parent="Enemies" instance=ExtResource("5_6q1b0")]
+visible = false
 position = Vector2(366, 803)
-scale = Vector2(0.2, 0.2)
 
 [node name="E_Room_1_2" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(-318, 143)
-scale = Vector2(0.2, 0.2)
 waypoints = Array[NodePath]([NodePath("../Waypoints/Room_1/E_2_1"), NodePath("../Waypoints/Room_1/E_2_2")])
 
 [node name="E_Room_1_3" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(-190, -42)
-scale = Vector2(0.2, 0.2)
 
 [node name="E_Room_2_1" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(305, 67)
-scale = Vector2(0.2, 0.2)
 
 [node name="E_Room_2_2" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(59, 208)
-scale = Vector2(0.2, 0.2)
 waypoints = Array[NodePath]([NodePath("../Waypoints/Room_2/E_2_1"), NodePath("../Waypoints/Room_2/E_2_2")])
 
 [node name="E_Room_2_3" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(-133, 449)
-scale = Vector2(0.2, 0.2)
 waypoints = Array[NodePath]([NodePath("../Waypoints/Room_2/E_3_1"), NodePath("../Waypoints/Room_2/E_3_2")])
 
 [node name="E_Room_2_4" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(283, 441)
-scale = Vector2(0.2, 0.2)
 
 [node name="E_Room_2_5" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(284, 322)
-scale = Vector2(0.2, 0.2)
 waypoints = Array[NodePath]([NodePath("../Waypoints/Room_2/E_5_1")])
 
 [node name="E_Room_3_1" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(-59, 737)
-scale = Vector2(0.2, 0.2)
 
 [node name="E_Room_1" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(-316, -486)
-scale = Vector2(0.2, 0.2)
 drops_disguise = true
 waypoints = Array[NodePath]([NodePath("../Waypoints/Room_1/E_1_1"), NodePath("../Waypoints/Room_1/E_1_2"), NodePath("../Waypoints/Room_1/E_1_3"), NodePath("../Waypoints/Room_1/E_1_4")])
 

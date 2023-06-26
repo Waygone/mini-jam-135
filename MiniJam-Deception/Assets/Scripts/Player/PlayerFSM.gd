@@ -1,5 +1,8 @@
 extends FiniteStateMachine
 
+var stoped_attacking = false
+var stoped_damaged = false
+
 func _init():
 	_add_state("Idle")
 	_add_state("Walk")
@@ -35,7 +38,7 @@ func _get_transition():
 				return states.Idle
 		
 		states.Attack:
-			if not animation_player.is_playing():
+			if stoped_attacking:
 				parent.is_attacking = false
 				return states.Idle
 
@@ -45,7 +48,7 @@ func _get_transition():
 			if parent.is_attacking:
 				return states.Attack
 				
-			elif not animation_player.is_playing():
+			elif stoped_damaged:
 				return states.Idle
 
 		states.Dead:
@@ -53,10 +56,24 @@ func _get_transition():
 			if !parent.is_dead:
 				parent.is_dead = true
 				parent.die()
-			if not animation_player.is_playing():
-				return states.Idle
+#			if not animation_player.is_playing():
+#				return states.Idle
 			
 	return -1
+
+func _on_animation_tree_animation_finished(anim_name):
+	if "Attack" in anim_name:
+		stoped_attacking = true
+	if "Damaged" in anim_name:
+		stoped_attacking = true
+
+func _on_animation_tree_animation_started(anim_name):
+#	print(anim_name)
+	if "Attack" in anim_name:
+		stoped_attacking = false
+	if "Damaged" in anim_name:
+		stoped_attacking = false
+
 
 func _enter_state(_previous_state, new_state):
 	if parent.is_ready:
@@ -64,16 +81,12 @@ func _enter_state(_previous_state, new_state):
 			states.Idle:
 				#animation_player.play("Idle")
 				parent.animation_state.travel("Idle")
-				
-				print("idle")
 			states.Walk:
 				#animation_player.play("Walk_L")
 				parent.animation_state.travel("Walk")
-				print("walk")
 			states.Attack:
 				#animation_player.play("Attack")
 				parent.animation_state.travel("Attack")
-				print("at")
 			states.Damaged:
 				#animation_player.play("Damaged")
 				parent.animation_state.travel("Damaged")
@@ -81,3 +94,7 @@ func _enter_state(_previous_state, new_state):
 				#animation_player.play("Dead")
 				parent.animation_state.travel("Dead")
 			
+
+
+
+
