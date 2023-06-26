@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=22 format=3 uid="uid://bofennc76qhna"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Player/Player.gd" id="1_qcmka"]
@@ -6,6 +7,16 @@
 [ext_resource type="Texture2D" uid="uid://dqhs4kgqc2awt" path="res://Assets/Sprites/Placeholder/attack1.png" id="3_v6dwi"]
 [ext_resource type="Texture2D" uid="uid://cltaffh7c2w7w" path="res://Assets/Sprites/Placeholder/attack2.png" id="4_upnjx"]
 [ext_resource type="Texture2D" uid="uid://1el7ktml3x8i" path="res://Assets/Sprites/Placeholder/attack3.png" id="5_slfw0"]
+=======
+[gd_scene load_steps=77 format=3 uid="uid://bofennc76qhna"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Player/Player.gd" id="1_qcmka"]
+[ext_resource type="Texture2D" uid="uid://bau5ifxlripkb" path="res://Sprites/icon.svg" id="2_7aqug"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://f3mcpnjw88" path="res://Assets/Sprites/PlayerTree.tres" id="2_k7as6"]
+[ext_resource type="Script" path="res://Assets/Scripts/Player/PlayerFSM.gd" id="3_jsj1k"]
+[ext_resource type="Texture2D" uid="uid://dsgfmfx10cx8h" path="res://Sprites/character animations/main-character-normal-walk.png" id="3_krrke"]
+[ext_resource type="Texture2D" uid="uid://b0mxqetuon306" path="res://Sprites/character animations/main-character-disguised-walk.png" id="5_0tt8g"]
+>>>>>>> Stashed changes
 [ext_resource type="Texture2D" uid="uid://c7dhe0dru6cha" path="res://Assets/Sprites/Placeholder/point_light.jpg" id="7_6cbbv"]
 [ext_resource type="AudioStream" uid="uid://hvw5gxwq2506" path="res://Assets/Audio/SFX/Player Die_SFX__MiniJam.wav" id="8_72crx"]
 [ext_resource type="AudioStream" uid="uid://cwm7txw7mlr70" path="res://Assets/Audio/SFX/Get Loot_SFX__MiniJam.wav" id="9_h8jba"]
@@ -315,5 +326,7 @@ bus = &"SFX"
 stream = ExtResource("11_jhmno")
 bus = &"SFX"
 
+[connection signal="animation_finished" from="AnimationTree" to="FiniteStateMachine" method="_on_animation_tree_animation_finished"]
+[connection signal="animation_started" from="AnimationTree" to="FiniteStateMachine" method="_on_animation_tree_animation_started"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="timeout" from="Timers/LoadSaveSystemTimer" to="." method="_on_load_save_system_timer_timeout"]

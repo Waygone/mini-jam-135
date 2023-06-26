@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=14 format=3 uid="uid://olak8v8rsxui"]
+=======
+[gd_scene load_steps=17 format=3 uid="uid://olak8v8rsxui"]
+>>>>>>> Stashed changes
 
 [ext_resource type="PackedScene" uid="uid://bofennc76qhna" path="res://Assets/Characters/player.tscn" id="1_2r152"]
 [ext_resource type="PackedScene" uid="uid://dv5lyhhkfpptt" path="res://Assets/Prefabs/Pickables/BiggerGold.tscn" id="1_6wmiw"]
@@ -11,8 +15,32 @@
 [ext_resource type="PackedScene" uid="uid://b70ip0mko7qr5" path="res://Assets/Characters/Boss.tscn" id="5_6q1b0"]
 [ext_resource type="TileSet" uid="uid://bxgjbs1ew1kp" path="res://Sprites/dungeon-tiles/tileset_dungeon-tiles.tres" id="5_qvfbb"]
 [ext_resource type="Script" path="res://Assets/Scripts/Base/SaveSystem.gd" id="11_u3got"]
+<<<<<<< Updated upstream
 [ext_resource type="AudioStream" uid="uid://glb51y7wog7o" path="res://Assets/Audio/Music/Level 1_MiniJam mast.wav" id="12_ooidf"]
 [ext_resource type="PackedScene" uid="uid://b2yg5vtcajwdd" path="res://Scenes/Options.tscn" id="13_vc80h"]
+=======
+[ext_resource type="AudioStream" uid="uid://6tok6oax7p0b" path="res://Assets/Audio/Music/Level 2_MiniJam.wav" id="12_r424q"]
+[ext_resource type="Texture2D" uid="uid://s6sitadk15on" path="res://Sprites/tileset.png" id="12_vskaf"]
+[ext_resource type="PackedScene" uid="uid://b2yg5vtcajwdd" path="res://Scenes/Options.tscn" id="13_vc80h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0riy"]
+size = Vector2(5.46759, 6.21318)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76k3w"]
+atlas = ExtResource("12_vskaf")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f3hey"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76k3w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+>>>>>>> Stashed changes
 
 [node name="World" type="Node2D"]
 
@@ -149,6 +177,13 @@ script = ExtResource("11_u3got")
 stream = ExtResource("12_ooidf")
 autoplay = true
 bus = &"Music"
+
+[node name="Options" parent="." instance=ExtResource("13_vc80h")]
+visible = false
+
+[node name="LevelMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_r424q")
+autoplay = true
 
 [node name="Options" parent="." instance=ExtResource("13_vc80h")]
 visible = false
