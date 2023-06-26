@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dk6bgw6bhdjsc"]
+[gd_scene load_steps=11 format=3 uid="uid://dk6bgw6bhdjsc"]
 
 [ext_resource type="PackedScene" uid="uid://dv5lyhhkfpptt" path="res://Assets/Prefabs/Pickables/BiggerGold.tscn" id="1_suixh"]
 [ext_resource type="PackedScene" uid="uid://dph2c466mry5v" path="res://Assets/Prefabs/Pickables/gold.tscn" id="2_udv47"]
@@ -6,8 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://b70ip0mko7qr5" path="res://Assets/Characters/Boss.tscn" id="5_yi1u3"]
 [ext_resource type="PackedScene" uid="uid://du76st4c5ioh0" path="res://Assets/Characters/BasicEnemy.tscn" id="6_h5gvp"]
 [ext_resource type="PackedScene" uid="uid://bgvlbliw68sdh" path="res://Assets/Scenes/Menus/UI.tscn" id="7_2fphb"]
-[ext_resource type="TileSet" uid="uid://bxgjbs1ew1kp" path="res://sprites/dungeon-tiles/tileset_dungeon-tiles.tres" id="8_82oww"]
+[ext_resource type="TileSet" uid="uid://bxgjbs1ew1kp" path="res://Sprites/dungeon-tiles/tileset_dungeon-tiles.tres" id="8_82oww"]
 [ext_resource type="Script" path="res://Assets/Scripts/Base/SaveSystem.gd" id="8_pwnlf"]
+[ext_resource type="AudioStream" uid="uid://6tok6oax7p0b" path="res://Assets/Audio/Music/Level 2_MiniJam.wav" id="9_eueqr"]
+[ext_resource type="PackedScene" uid="uid://b2yg5vtcajwdd" path="res://Scenes/Options.tscn" id="10_bvhkl"]
 
 [node name="World" type="Node2D"]
 
@@ -67,6 +69,14 @@ color = Color(0, 0, 0, 1)
 
 [node name="SaveSystem" type="Node" parent="." groups=["Save"]]
 script = ExtResource("8_pwnlf")
+
+[node name="Level2 Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_eueqr")
+autoplay = true
+bus = &"Music"
+
+[node name="Options" parent="." instance=ExtResource("10_bvhkl")]
+visible = false
 
 [connection signal="gold_changed" from="Player" to="UI" method="_on_player_gold_changed"]
 [connection signal="hp_changed" from="Player" to="UI" method="_on_player_hp_changed"]

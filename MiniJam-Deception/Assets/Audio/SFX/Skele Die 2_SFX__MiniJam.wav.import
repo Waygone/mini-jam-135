@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://7p4pxvpj6jnp"
+path="res://.godot/imported/Skele Die 2_SFX__MiniJam.wav-aa22a42586226e4e9e45a46fef3c9668.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/Skele Die 2_SFX__MiniJam.wav"
+dest_files=["res://.godot/imported/Skele Die 2_SFX__MiniJam.wav-aa22a42586226e4e9e45a46fef3c9668.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

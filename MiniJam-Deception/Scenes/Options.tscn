@@ -1,15 +1,21 @@
-[gd_scene format=3 uid="uid://b2yg5vtcajwdd"]
+[gd_scene load_steps=9 format=3 uid="uid://b2yg5vtcajwdd"]
 
-[node name="Options" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[ext_resource type="Script" path="res://Scripts/VolSlider.gd" id="1_i41vs"]
+[ext_resource type="FontFile" uid="uid://bfkfgwlyw3tbo" path="res://Assets/Font/bold-font/Bold-X3RG.ttf" id="1_ngkdv"]
+[ext_resource type="Script" path="res://Scripts/Options.gd" id="1_u8sne"]
+[ext_resource type="Script" path="res://Scripts/MusicVol.gd" id="2_fkqvk"]
+[ext_resource type="Script" path="res://Scripts/SFXVol.gd" id="3_4alwx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5vy0n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xdqdc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jtlel"]
+
+[node name="Options" type="CanvasLayer"]
+script = ExtResource("1_u8sne")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -18,17 +24,16 @@ grow_vertical = 2
 color = Color(0.0627451, 0.301961, 0.160784, 1)
 
 [node name="Label" type="Label" parent="."]
-layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 140.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_ngkdv")
 theme_override_font_sizes/font_size = 100
 text = "Options"
 horizontal_alignment = 1
 
 [node name="Back" type="Button" parent="."]
-layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -40,5 +45,83 @@ offset_right = 171.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("1_ngkdv")
 theme_override_font_sizes/font_size = 75
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5vy0n")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_xdqdc")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jtlel")
 text = "Back"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -28.0
+offset_right = -111.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Master" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ngkdv")
+theme_override_font_sizes/font_size = 35
+text = "Master"
+
+[node name="MasterVol" type="HSlider" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.05
+script = ExtResource("1_i41vs")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Master" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ngkdv")
+theme_override_font_sizes/font_size = 35
+text = "Music
+"
+
+[node name="MusicVol" type="HSlider" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.05
+script = ExtResource("2_fkqvk")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Sound Effects" type="Label" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ngkdv")
+theme_override_font_sizes/font_size = 35
+text = "Sound Effects
+"
+
+[node name="SFXVol" type="HSlider" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.05
+script = ExtResource("3_4alwx")
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/MasterVol" to="VBoxContainer/HBoxContainer/MasterVol" method="_on_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer2/MusicVol" to="VBoxContainer/HBoxContainer2/MusicVol" method="_on_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer3/SFXVol" to="VBoxContainer/HBoxContainer3/SFXVol" method="_on_value_changed"]
