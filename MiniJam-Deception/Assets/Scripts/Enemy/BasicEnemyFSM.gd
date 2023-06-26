@@ -65,14 +65,14 @@ func _on_animation_tree_animation_finished(anim_name):
 	if "Attack" in anim_name:
 		stoped_attacking = true
 	if "Damaged" in anim_name:
-		stoped_attacking = true
+		stoped_damaged = true
 
 func _on_animation_tree_animation_started(anim_name):
 #	print(anim_name)
 	if "Attack" in anim_name:
 		stoped_attacking = false
 	if "Damaged" in anim_name:
-		stoped_attacking = false
+		stoped_damaged = false
 
 
 

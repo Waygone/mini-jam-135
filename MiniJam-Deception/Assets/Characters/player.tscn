@@ -883,6 +883,11 @@ region = Rect2(140, 0, 20, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_a8dbl"]
 animations = [{
+"frames": [],
+"loop": true,
+"name": &"Attack",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_it7np")
@@ -1085,11 +1090,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"Walk_U",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"new_animation",
 "speed": 5.0
 }]
 
@@ -1508,6 +1508,11 @@ autostart = true
 [node name="SFX" type="Node2D" parent="."]
 
 [node name="Walk" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("10_h3wib")
+volume_db = 6.0
+pitch_scale = 1.14
+attenuation = 2.2974
+bus = &"SFX"
 
 [node name="Damaged" type="AudioStreamPlayer2D" parent="SFX"]
 position = Vector2(0, -1)

@@ -28,7 +28,8 @@ func _get_transition():
 			#elif parent.velocity.length() > 15 || parent.velocity.y >= 10:
 				#get_parent().get_node("SoundFX/Walk").playing = true
 			elif parent.velocity.length() > 15 || parent.velocity.y < 10:
-				$"../Step".play()
+				get_parent().get_node("SFX/Walk").playing = true
+				#$"../Step".play()
 				return states.Walk
 				
 		states.Walk:
@@ -36,6 +37,7 @@ func _get_transition():
 				return states.Attack
 			
 			elif parent.velocity.length() < 15 && parent.velocity.y < 10:
+				get_parent().get_node("SFX/Walk").playing = false
 				#get_parent().get_node("SoundFX/Walk").playing = false
 				return states.Idle
 		
@@ -67,14 +69,14 @@ func _on_animation_tree_animation_finished(anim_name):
 	if "Attack" in anim_name:
 		stoped_attacking = true
 	if "Damaged" in anim_name:
-		stoped_attacking = true
+		stoped_damaged = true
 
 func _on_animation_tree_animation_started(anim_name):
 #	print(anim_name)
 	if "Attack" in anim_name:
 		stoped_attacking = false
 	if "Damaged" in anim_name:
-		stoped_attacking = false
+		stoped_damaged = false
 
 
 func _enter_state(_previous_state, new_state):

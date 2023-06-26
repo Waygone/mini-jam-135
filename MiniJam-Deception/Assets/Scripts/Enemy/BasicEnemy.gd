@@ -90,7 +90,6 @@ func _ready():
 
 
 func _process(_delta):
-	print(state_machine.state)
 	if !is_dead:
 		detect_player()
 
@@ -132,19 +131,20 @@ func actions_handler():
 	pass
 
 func create_path(target):
+	nav_agent.set_navigation_layer_value(1,true)
 	nav_agent.target_position = target
 
 
 func _on_navigation_timer_timeout():
-	if(player_detected and !is_attacking and nav_agent.is_target_reachable()):
+	if(player_detected and !is_attacking):# and nav_agent.is_target_reachable()):
 		create_path(player.global_position)
+
+	elif !is_roaming and player_detected:
+		stop_agent_following()
 
 	elif(nav_agent.distance_to_target() >= 1000.0):
 		if !is_roaming:
-			player_detected = false
 			roam()
-	else:
-		create_path(global_position)
 
 	
 func get_circle_position(random):
@@ -166,26 +166,27 @@ func detect_player():
 			if temp:
 				if temp.is_in_group("Player"):
 					if !temp.is_disguised:
-						player_detected = true
-						alert_other_enemies(true)
+						on_player_detected()
 
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("Player"):
-		player_detected = true
-		alert_other_enemies(true)
+		on_player_detected()
 #		if !body.is_disguised:
 #			player_detected = true
 #			alert_other_enemies(true)
-		
+	
+func on_player_detected():
+	player_detected = true
+	is_roaming = false
+	alert_other_enemies(true)
+
 func alert_other_enemies(alert):
 	alert_enemies_collision.set_deferred("disabled", !alert)
 
 func _on_alert_other_enemy_body_entered(body):
 	if body.is_in_group("Enemy"):
 		if !body.player_detected:
-			body.player_detected = true 
-			#alert_other_enemies(false)
-			body.alert_other_enemies(true)
+			on_player_detected()
 	
 func _on_attack_area_body_entered(body):
 	if body.is_in_group("Player"):
@@ -199,7 +200,10 @@ func _on_damage_area_body_entered(body):
 	if body.is_in_group("Player"):
 		body.take_damage(damage, body.global_position - global_position, 10)
 		body.disguise(false)
-	
+
+func stop_agent_following():
+	nav_agent.set_navigation_layer_value(1,false)
+
 
 """|||||||||||||||||||||||||||||||||||| ACTIONS |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
@@ -215,10 +219,10 @@ func _on_attack_rate_timeout():
 	attack_area_collision.disabled = false
 
 func _on_could_not_reach_player_timeout():
-	player_detected = false
 	roam()
 
 func roam():
+	player_detected = false
 	if len(waypoints) > 0:
 		is_roaming = true
 		alert_other_enemies(false)
@@ -235,6 +239,9 @@ func roam():
 func _on_navigation_agent_2d_navigation_finished():
 	if !player_detected:
 		roam()
+
+func _on_navigation_agent_2d_target_reached():
+	pass
 
 """|||||||||||||||||||||||||||||||||||| DAMAGE |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
@@ -260,7 +267,7 @@ func die():
 	$Timers/DeathTimer.start()
 	$DeathParticles.set_deferred("emitting", true)
 	$AnimatedSprite2D.visible = false
-	$Die.play()
+	#$Die.play()
 
 
 

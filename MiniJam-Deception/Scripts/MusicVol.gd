@@ -9,5 +9,5 @@ func _ready():
 	value = db_to_linear(AudioServer.get_bus_volume_db(_bus))
 
 
-func _on_value_changed(value: float):
-	AudioServer.set_bus_volume_db(_bus, linear_to_db(value))
+func _on_value_changed(val: float):
+	AudioServer.set_bus_volume_db(_bus, linear_to_db(val))
