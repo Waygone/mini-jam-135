@@ -34,6 +34,7 @@ var b_screen_tween : Tween
 	get:
 		return hp
 signal hp_changed(new_hp)
+@onready var max_hp = hp
 
 @export var gold = 0.0:
 	set(value):
@@ -84,10 +85,6 @@ func _physics_process(_delta):
 	actions_input()
 	move_and_slide()
 
-func collect_points(points: int):
-	gold += points	
-	emit_signal("gold_changed", gold)
-
 func update_enemy_kill_count(kills):
 	enemy_kill_count += kills
 
@@ -121,7 +118,7 @@ func attack():
 
 func _on_damage_area_body_entered(body):
 	if body.is_in_group("Enemy"):
-		body.take_damage(attack_damage, body.global_position - global_position, 25)
+		body.take_damage(attack_damage, Vector2(body.global_position.x, body.global_position.y) - Vector2(global_position.x -5, global_position.y-5), 50)
 	
 func interact():
 	is_interacting = true
@@ -134,7 +131,7 @@ func disguise(is_dis: bool):
 func add_gold(amount):
 	$SFX/GetTreasure.play()
 	gold += amount
-	collect_points(amount)
+	emit_signal("gold_changed", gold)
 	#emit_signal("gold_changed", gold)
 
 """|||||||||||||||||||||||||||||||||||| HEALTH |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
@@ -152,12 +149,15 @@ func take_damage(damage, push_direction, force):
 	self.hp -= damage
 	state_machine.set_state(state_machine.states.Damaged if hp > 0 else state_machine.states.Dead)
 	
-	emit_signal("hp_changed", hp)
+	set_hp(hp)
 	
 
 func die():
 	$SFX/PlayerDie.play()
-	pass
+	fade_to_black_screen(1,1)
+	global_position = starting_point
+	set_hp(max_hp)
+	
 
 """|||||||||||||||||||||||||||||||||||| TIME |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
@@ -181,7 +181,7 @@ func change_level(level):
 	Scoring.s_enemies = enemy_kill_count
 	Scoring.s_time = stopwatch
 	
-	Scoring.s_score = (gold - enemy_kill_count)/stopwatch
+	Scoring.s_score = (gold - (enemy_kill_count * 10))/stopwatch
 	
 	if Scoring.s_score > Scoring.hs_highscore:
 		Scoring.hs_highscore = Scoring.s_score

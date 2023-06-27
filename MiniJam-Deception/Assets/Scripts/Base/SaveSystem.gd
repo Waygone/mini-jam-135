@@ -23,7 +23,7 @@ func save_data(json : String):
 
 func load_data(level: String) -> Dictionary:
 	var save_game = FileAccess.open("user://save_game.dat", FileAccess.READ)
-	while save_game.get_position() < save_game.get_length():
+	while save_game.get_position() < save_game.get_lengths():
 		var json_string = save_game.get_line()
 
 		var json = JSON.new()

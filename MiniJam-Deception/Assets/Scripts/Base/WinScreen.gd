@@ -15,7 +15,6 @@ extends Control
 @onready var highscore_time = $MarginContainer/ScoresVContainer/HighscoreContainer/HBoxContainer/time
 
 
-@onready var black_screen = $ScreenEffects/FadeToBlackScreen
 var b_screen_tween : Tween
 
 
@@ -39,7 +38,7 @@ func load_texts():
 	var string_score = "%3.2f"
 	var string_time = "TIME: %3.3fs"
 	var string_gold = "GOLD COLLECTED: x%d"
-	var string_enemies = "ENEMIES KILLED: %d"
+	var string_enemies = "ENEMIES KILLED: %d * 10"
 	
 	score.text = string_score % Scoring.s_score
 	score_time.text = string_time % Scoring.s_time
