@@ -1,0 +1,11 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://o213dknt5d6f"]
+
+[ext_resource type="FontFile" uid="uid://bfkfgwlyw3tbo" path="res://Assets/Font/bold-font/Bold-X3RG.ttf" id="1_qtht8"]
+
+[resource]
+font = ExtResource("1_qtht8")
+font_size = 60
+font_color = Color(0.94902, 0, 0.403922, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.627451)
+shadow_offset = Vector2(2, 2)

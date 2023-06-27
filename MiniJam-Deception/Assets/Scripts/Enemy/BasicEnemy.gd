@@ -90,11 +90,11 @@ func _ready():
 
 
 func _process(_delta):
-	if !is_dead:
+	if !is_dead and !player.is_level_finished:
 		detect_player()
 
 func _physics_process(_delta):
-	if !is_dead:
+	if !is_dead and !player.is_level_finished:
 		movement_handler()
 
 """|||||||||||||||||||||||||||||||||||| HANDLERS |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
