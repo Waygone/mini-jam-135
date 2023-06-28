@@ -1,0 +1,106 @@
+[gd_scene load_steps=10 format=3 uid="uid://c05sn0hfiuxjc"]
+
+[ext_resource type="FontFile" uid="uid://bfkfgwlyw3tbo" path="res://Assets/Font/bold-font/Bold-X3RG.ttf" id="1_afar2"]
+[ext_resource type="Script" path="res://Scripts/pause.gd" id="1_ri4sb"]
+[ext_resource type="PackedScene" uid="uid://b2yg5vtcajwdd" path="res://Scenes/Options.tscn" id="2_njmsc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4qamt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c17wv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_okbbj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_idu38"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b5d3f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gioof"]
+
+[node name="Pause" type="CanvasLayer"]
+script = ExtResource("1_ri4sb")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.713726)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -231.0
+offset_top = -70.0
+offset_right = 231.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("1_afar2")
+theme_override_font_sizes/font_size = 120
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Menu" type="VBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -394.0
+offset_top = -164.0
+offset_right = 394.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Options" type="Button" parent="Menu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("1_afar2")
+theme_override_font_sizes/font_size = 75
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4qamt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_c17wv")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_okbbj")
+text = "Options"
+
+[node name="MainMenu" type="Button" parent="Menu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("1_afar2")
+theme_override_font_sizes/font_size = 75
+theme_override_styles/normal = SubResource("StyleBoxEmpty_idu38")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_b5d3f")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gioof")
+text = "Back to Main Menu"
+
+[node name="Return" type="Button" parent="Menu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("1_afar2")
+theme_override_font_sizes/font_size = 75
+theme_override_styles/normal = SubResource("StyleBoxEmpty_idu38")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_b5d3f")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gioof")
+text = "Return to Game"
+
+[node name="Options" parent="." instance=ExtResource("2_njmsc")]
+visible = false
+
+[connection signal="pressed" from="Menu/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Menu/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Menu/Return" to="." method="_on_return_pressed"]
