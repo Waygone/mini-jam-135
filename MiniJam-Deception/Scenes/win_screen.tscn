@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cfss6y4j66m37"]
+[gd_scene load_steps=8 format=3 uid="uid://cfss6y4j66m37"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Base/WinScreen.gd" id="1_4bidp"]
 [ext_resource type="FontFile" uid="uid://bfkfgwlyw3tbo" path="res://Assets/Font/bold-font/Bold-X3RG.ttf" id="1_6wj2i"]
@@ -23,15 +23,6 @@ font_color = Color(0, 0.45098, 0.462745, 1)
 shadow_size = 4
 shadow_color = Color(0, 0, 0, 0.592157)
 shadow_offset = Vector2(2, 2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cnh22"]
-bg_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_67slx"]
-bg_color = Color(0.643137, 0.643137, 0.643137, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ffdtm"]
-bg_color = Color(0, 0, 0, 1)
 
 [node name="WinScreen" type="Control"]
 layout_mode = 3
@@ -104,26 +95,10 @@ label_settings = SubResource("LabelSettings_6rrdy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="-" type="Label" parent="MarginContainer/ScoresVContainer/ScoreContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "-"
-label_settings = ExtResource("4_w74af")
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="enemies" type="Label" parent="MarginContainer/ScoresVContainer/ScoreContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "ENEMIES KILLED: 20"
-label_settings = ExtResource("4_w74af")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="div" type="Label" parent="MarginContainer/ScoresVContainer/ScoreContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "/"
 label_settings = ExtResource("4_w74af")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -171,26 +146,10 @@ label_settings = SubResource("LabelSettings_6rrdy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="-" type="Label" parent="MarginContainer/ScoresVContainer/HighscoreContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "-"
-label_settings = ExtResource("4_w74af")
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="enemies" type="Label" parent="MarginContainer/ScoresVContainer/HighscoreContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "ENEMIES KILLED: 20"
-label_settings = ExtResource("4_w74af")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="div" type="Label" parent="MarginContainer/ScoresVContainer/HighscoreContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "/"
 label_settings = ExtResource("4_w74af")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -207,15 +166,12 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.996078, 0.996078, 0.996078, 1)
-theme_override_colors/font_hover_color = Color(0.94902, 0, 0.403922, 1)
+theme_override_colors/font_hover_color = Color(0.172549, 0.298039, 0.521569, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0.45098, 0.462745, 1)
+theme_override_colors/font_outline_color = Color(0, 0.952941, 0.976471, 1)
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("1_6wj2i")
 theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxFlat_cnh22")
-theme_override_styles/hover = SubResource("StyleBoxFlat_67slx")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ffdtm")
 text = "PLAY AGAIN"
 text_overrun_behavior = 2
 clip_text = true

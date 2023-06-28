@@ -1,4 +1,4 @@
-    [gd_resource type="TileSet" load_steps=34 format=3 uid="uid://bxgjbs1ew1kp"]
+[gd_resource type="TileSet" load_steps=34 format=3 uid="uid://bxgjbs1ew1kp"]
 
 [ext_resource type="Texture2D" uid="uid://cb3uwabfja5nb" path="res://sprites/dungeon-tiles/tileset_dungeon-tiles.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://ci5hc6q387kwo" path="res://sprites/dungeon-wall-wang.png" id="2_c3blj"]

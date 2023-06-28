@@ -11,8 +11,8 @@ func _ready():
 #		var save_dict = {
 #			"level" : 0,
 #		}
-#		var json_string = JSON.stringify(save_dict)
-#		save_data(json_string)
+#		var json_string = JSON.stringify(save_act)
+#		save_data(json_string)aa
 
 
 
@@ -21,7 +21,7 @@ func save_data(json : String):
 	save_file.store_line(json)
 	save_file.close()
 
-func load_data(level: String) -> Dictionary:
+func load_data(to_load: String) -> Dictionary:
 	var save_game = FileAccess.open("user://save_game.dat", FileAccess.READ)
 	while save_game.get_position() < save_game.get_lengths():
 		var json_string = save_game.get_line()
@@ -35,7 +35,7 @@ func load_data(level: String) -> Dictionary:
 			continue
 
 		var data = json.get_data()
-		if data["level"] == level:
+		if data["level"] == to_load:
 			return data
 		
 	return {}

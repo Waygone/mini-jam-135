@@ -36,4 +36,5 @@ func _on_player_level_timer_changed(new_time):
 
 
 func _on_player_gold_changed(new_gold):
-	counter.text = "x"+str(new_gold)
+	if counter:
+		counter.text = "x"+str(new_gold)

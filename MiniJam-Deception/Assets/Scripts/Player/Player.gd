@@ -24,6 +24,12 @@ var save_system
 @onready var black_screen = $ScreenEffects/FadeToBlackScreen
 var b_screen_tween : Tween
 
+@onready var vignette = $ScreenEffects/VignetteEffect
+var vignette_m = 1.8
+var vignette_s = 1.8
+
+var rng
+
 """|||||||||||||||||||||||||||||||||||| VARs |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
 @export var speed = 150.0
@@ -36,7 +42,7 @@ var b_screen_tween : Tween
 signal hp_changed(new_hp)
 @onready var max_hp = hp
 
-@export var gold = 0.0:
+@onready var gold = Scoring.s_gold:
 	set(value):
 		gold = value
 	get:
@@ -44,11 +50,15 @@ signal hp_changed(new_hp)
 signal gold_changed(new_gold)
 
 const FRICTION = 10
-@export var stopwatch = 0.0:
+@onready var stopwatch = Scoring.s_time:
 	set(value):
 		stopwatch = value
 	get:
 		return stopwatch
+
+@onready var enemy_kill_count = Scoring.s_enemies
+
+
 signal level_timer_changed(new_time)
 
 """|||||||||||||||||||||||||||||||||||| ACTIONS |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
@@ -61,7 +71,6 @@ var is_disguised = false
 var is_moving = false
 var idle = true
 
-var enemy_kill_count = 0
 
 var is_ready = false
 
@@ -76,6 +85,14 @@ func _ready():
 	save_system = get_tree().get_first_node_in_group("Save")
 	
 	is_ready = true
+	
+	vignette.material.set("shader_parameter/multiplier", vignette_m);
+	vignette.material.set("shader_parameter/softness", vignette_s);
+	
+	emit_signal("gold_changed", gold)
+	
+	rng = RandomNumberGenerator.new()
+	rng.randomize()
 	
 func _process(delta):
 	update_level_timer(delta)
@@ -115,6 +132,9 @@ func actions_input():
 
 func attack():
 	is_attacking = true
+	var random_num = rng.randf_range(0.5, 0.9)
+	$SFX/Attack.pitch_scale = random_num
+	$SFX/Attack.play()
 
 func _on_damage_area_body_entered(body):
 	if body.is_in_group("Enemy"):
@@ -138,25 +158,41 @@ func add_gold(amount):
 
 func set_hp(new_hp):
 	hp = new_hp
+	vignette.material.set("shader_parameter/softness", vignette_s - (max_hp-hp));
 	emit_signal("hp_changed", new_hp)
 	
 
 func take_damage(damage, push_direction, force):
-	$SFX/GotHit.play()
+	$SFX/Damaged.play()
 	velocity += push_direction * force
 	move_and_slide()
 	
 	self.hp -= damage
+	var soft = vignette.material.get("shader_parameter/softness")
+	vignette.material.set("shader_parameter/softness", soft - 0.1);
 	state_machine.set_state(state_machine.states.Damaged if hp > 0 else state_machine.states.Dead)
 	
 	set_hp(hp)
 	
 
 func die():
-	$SFX/PlayerDie.play()
-	fade_to_black_screen(1,1)
-	global_position = starting_point
-	set_hp(max_hp)
+	$SFX/Death.play()
+	vignette.material.set("shader_parameter/multiplier", vignette.material.get("shader_parameter/multiplier") - 0.1);
+	fade_to_black_screen(1,0.5)
+
+func respawn():
+	if is_dead:
+		is_dead = false
+		global_position = starting_point
+		set_hp(max_hp)
+		
+		fade_to_black_screen(0,0.5)
+		vignette.material.set("shader_parameter/softness", vignette_s);
+		vignette.material.set("shader_parameter/multiplier", vignette_m);
+		
+		
+	vignette.visible = false
+	#fade_to_black_screen(1,0.5)
 	
 
 """|||||||||||||||||||||||||||||||||||| TIME |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
@@ -183,12 +219,6 @@ func change_level(level):
 	
 	Scoring.s_score = (gold - (enemy_kill_count * 10))/stopwatch
 	
-	if Scoring.s_score > Scoring.hs_highscore:
-		Scoring.hs_highscore = Scoring.s_score
-		Scoring.hs_time = Scoring.s_time
-		Scoring.hs_enemies = Scoring.s_enemies
-		Scoring.hs_gold = Scoring.s_gold
-	
 	
 	next_level = level
 	fade_to_black_screen(1,1)
@@ -202,8 +232,10 @@ func change_level(level):
 	
 
 func change_scene():
-	get_tree().change_scene_to_packed(next_level)
-	
+	if is_level_finished and next_level:
+		get_tree().change_scene_to_packed(next_level)
+	elif is_dead:
+		respawn()
 	
 	
 func fade_to_black_screen(final, duration):

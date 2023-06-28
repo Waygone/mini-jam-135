@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=3 uid="uid://bofennc76qhna"]
+[gd_scene load_steps=122 format=3 uid="uid://bofennc76qhna"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Player/Player.gd" id="1_qcmka"]
 [ext_resource type="Texture2D" uid="uid://bau5ifxlripkb" path="res://sprites/icon.svg" id="2_7aqug"]
@@ -12,8 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://bc1l71h0uud2j" path="res://sprites/character animations/main-character-disguised-attack.png" id="7_me63x"]
 [ext_resource type="AudioStream" uid="uid://hvw5gxwq2506" path="res://Assets/Audio/SFX/Player Die_SFX__MiniJam.wav" id="8_72crx"]
 [ext_resource type="AudioStream" uid="uid://cwm7txw7mlr70" path="res://Assets/Audio/SFX/Get Loot_SFX__MiniJam.wav" id="9_h8jba"]
+[ext_resource type="AudioStream" uid="uid://bypwi5qon7lrd" path="res://Assets/Audio/SFX/Grunt_SFX_Minijam.wav" id="10_fvq6u"]
 [ext_resource type="AudioStream" uid="uid://ce0dw4mdx422l" path="res://Assets/Audio/SFX/Footstep_SFX_MiniJam.wav" id="10_h3wib"]
+[ext_resource type="AudioStream" uid="uid://dsylrhpmn4j4w" path="res://Assets/Audio/SFX/Grunt 2_SFX_Minijam.wav" id="11_ciq2m"]
 [ext_resource type="AudioStream" uid="uid://c7amjminceity" path="res://Assets/Audio/SFX/Get Hit_SFX__MiniJam.wav" id="11_jhmno"]
+[ext_resource type="AudioStream" uid="uid://dl21700e7vfep" path="res://Assets/Audio/SFX/Katana.wav" id="12_57j87"]
+[ext_resource type="Shader" path="res://Assets/Shaders/VignetteShader.gdshader" id="15_0imko"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2swoh"]
 radius = 7.5
@@ -1454,6 +1458,14 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_o26bc"]
 radius = 20.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4tkf6"]
+shader = ExtResource("15_0imko")
+shader_parameter/player_position = Vector2(0.5, 0.5)
+shader_parameter/color = Color(0.47451, 0, 0, 1)
+shader_parameter/multiplier = 1.8
+shader_parameter/scale = 1.5
+shader_parameter/softness = 1.8
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 129
 collision_mask = 129
@@ -1511,12 +1523,21 @@ bus = &"SFX"
 
 [node name="Damaged" type="AudioStreamPlayer2D" parent="SFX"]
 position = Vector2(0, -1)
+stream = ExtResource("10_fvq6u")
+volume_db = 15.0
+bus = &"SFX"
 
 [node name="Hp" type="AudioStreamPlayer2D" parent="SFX"]
+bus = &"SFX"
 
 [node name="Death" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("11_ciq2m")
+volume_db = 15.0
+bus = &"SFX"
 
 [node name="Attack" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("12_57j87")
+bus = &"SFX"
 
 [node name="PlayerDie" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource("8_72crx")
@@ -1538,6 +1559,7 @@ stream = ExtResource("11_jhmno")
 bus = &"SFX"
 
 [node name="RevealLight" type="PointLight2D" parent="."]
+blend_mode = 2
 range_item_cull_mask = 14
 shadow_enabled = true
 shadow_color = Color(0.0901961, 0.0901961, 0.0901961, 0.431373)
@@ -1555,6 +1577,15 @@ texture_scale = 4.0
 
 [node name="ScreenEffects" type="CanvasLayer" parent="."]
 process_mode = 3
+
+[node name="VignetteEffect" type="ColorRect" parent="ScreenEffects"]
+visible = false
+material = SubResource("ShaderMaterial_4tkf6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="FadeToBlackScreen" type="ColorRect" parent="ScreenEffects"]
 modulate = Color(1, 1, 1, 0)

@@ -60,8 +60,10 @@ func _get_transition():
 			if !parent.is_dead:
 				parent.is_dead = true
 				parent.die()
+			if parent.hp == parent.max_hp:
+				parent.vignette.visible = false
+				return states.Idle
 #			if not animation_player.is_playing():
-#				return states.Idle
 			
 	return -1
 
@@ -93,6 +95,7 @@ func _enter_state(_previous_state, new_state):
 				parent.animation_state.travel("Attack")
 			states.Damaged:
 				#animation_player.play("Damaged")
+				#parent.vignette.visible = true
 				parent.animation_state.travel("Damaged")
 			states.Dead:
 				#animation_player.play("Dead")

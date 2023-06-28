@@ -1,16 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://1bvqyfutrlfr"]
+[gd_scene load_steps=6 format=3 uid="uid://1bvqyfutrlfr"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/UnlockableDoor.gd" id="1_u466a"]
+[ext_resource type="Texture2D" uid="uid://s6sitadk15on" path="res://sprites/tileset.png" id="2_kq1rq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rcf6"]
+atlas = ExtResource("2_kq1rq")
+region = Rect2(0, 64, 32, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e0vw2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rcf6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_78u41"]
+size = Vector2(32, 12)
 
 [node name="UnlockableDoor" type="StaticBody2D"]
+z_index = 2
 script = ExtResource("1_u466a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_e0vw2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_78u41")

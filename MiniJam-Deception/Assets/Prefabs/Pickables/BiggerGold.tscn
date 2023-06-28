@@ -1,23 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://dv5lyhhkfpptt"]
+[gd_scene load_steps=14 format=3 uid="uid://dv5lyhhkfpptt"]
 
 [ext_resource type="PackedScene" uid="uid://cfos036fvag1d" path="res://Assets/Prefabs/Pickable.tscn" id="1_htpgl"]
 [ext_resource type="Script" path="res://Assets/Scripts/Pickables/gold.gd" id="2_k1ar5"]
 [ext_resource type="Texture2D" uid="uid://s6sitadk15on" path="res://sprites/tileset.png" id="3_sks4i"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7dxih"]
-atlas = ExtResource("3_sks4i")
-region = Rect2(32, 20, 16, 10)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_5u8vk"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7dxih")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uxuyk"]
 atlas = ExtResource("3_sks4i")
@@ -156,18 +141,13 @@ z_index = 2
 scale = Vector2(2.7, 2.7)
 script = ExtResource("2_k1ar5")
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." index="0"]
-position = Vector2(0, 9.66667)
-scale = Vector2(1.5517, 1.5517)
-sprite_frames = SubResource("SpriteFrames_5u8vk")
-
-[node name="AnimatedSprite2D" parent="." index="1"]
+[node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_8n6yh")
 
 [node name="CollisionShape2D" parent="Area2D" index="0"]
 shape = SubResource("CircleShape2D_c42xe")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
 libraries = {
 "": SubResource("AnimationLibrary_dka63")
 }

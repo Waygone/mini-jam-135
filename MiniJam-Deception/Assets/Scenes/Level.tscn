@@ -65,8 +65,14 @@ light_mode = 2
 script = ExtResource("11_u3got")
 
 [node name="UnlockableDoor" parent="." instance=ExtResource("2_iasju")]
-position = Vector2(962, 780)
-scale = Vector2(0.97633, 2.89029)
+position = Vector2(952, 783)
+rotation = 1.5708
+scale = Vector2(1.71121, 1.71121)
+
+[node name="UnlockableDoor2" parent="." instance=ExtResource("2_iasju")]
+position = Vector2(160, -865)
+rotation = 0.00066568
+scale = Vector2(1.71121, 1.71121)
 
 [node name="Door" parent="." instance=ExtResource("1_g6iqs")]
 position = Vector2(1139, 574)
@@ -97,7 +103,7 @@ visibility_layer = 2
 color = Color(0.741176, 0.741176, 0.741176, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_2r152")]
-position = Vector2(629, 781)
+position = Vector2(162, -757)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.6, 1.6)
@@ -134,44 +140,53 @@ position = Vector2(470, -19)
 [node name="E_Room_1_2" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(-318, 143)
 scale = Vector2(0.7, 0.7)
+damage = 10.0
 waypoints = Array[NodePath]([NodePath("../Waypoints/Room_1/E_2_1"), NodePath("../Waypoints/Room_1/E_2_2")])
 
 [node name="E_Room_1_3" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(-190, -42)
 scale = Vector2(0.7, 0.7)
+damage = 10.0
 
 [node name="E_Room_2_1" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(305, 67)
 scale = Vector2(0.7, 0.7)
+damage = 10.0
 drops_disguise = true
 
 [node name="E_Room_2_2" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(59, 208)
 scale = Vector2(0.7, 0.7)
+damage = 10.0
 waypoints = Array[NodePath]([NodePath("../Waypoints/Room_2/E_2_1"), NodePath("../Waypoints/Room_2/E_2_2")])
 
 [node name="E_Room_2_3" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(-133, 449)
 scale = Vector2(0.7, 0.7)
+damage = 10.0
 drops_disguise = true
 waypoints = Array[NodePath]([NodePath("../Waypoints/Room_2/E_3_1"), NodePath("../Waypoints/Room_2/E_3_2")])
 
 [node name="E_Room_2_4" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(283, 441)
 scale = Vector2(0.7, 0.7)
+damage = 10.0
 
 [node name="E_Room_2_5" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(284, 322)
 scale = Vector2(0.7, 0.7)
+damage = 10.0
 waypoints = Array[NodePath]([NodePath("../Waypoints/Room_2/E_5_1")])
 
 [node name="E_Room_3_1" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(-14, 737)
 scale = Vector2(0.7, 0.7)
+damage = 10.0
 
 [node name="E_Room_1" parent="Enemies" instance=ExtResource("2_c4s5m")]
 position = Vector2(-316, -486)
 scale = Vector2(0.7, 0.7)
+damage = 10.0
 drops_disguise = true
 waypoints = Array[NodePath]([NodePath("../Waypoints/Room_1/E_1_1"), NodePath("../Waypoints/Room_1/E_1_2"), NodePath("../Waypoints/Room_1/E_1_3"), NodePath("../Waypoints/Room_1/E_1_4")])
 
@@ -217,6 +232,10 @@ position = Vector2(284, 356)
 [node name="Boss" parent="Enemies" instance=ExtResource("10_ci4qu")]
 position = Vector2(367, 798)
 scale = Vector2(1.3, 1.3)
+speed = 150.0
+hp = 100
+damage = 12.0
+attack_rate = 0.5
 doors_to_open = Array[NodePath]([NodePath("../../UnlockableDoor")])
 
 [node name="UI" parent="." instance=ExtResource("4_7lv61")]

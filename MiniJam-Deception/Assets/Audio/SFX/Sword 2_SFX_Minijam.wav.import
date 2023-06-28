@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b4k7m31su37ej"
+path="res://.godot/imported/Sword 2_SFX_Minijam.wav-ccea2c0b2a36be3251dfb773989469bd.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/Sword 2_SFX_Minijam.wav"
+dest_files=["res://.godot/imported/Sword 2_SFX_Minijam.wav-ccea2c0b2a36be3251dfb773989469bd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

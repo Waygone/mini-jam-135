@@ -32,13 +32,21 @@ func _ready():
 	texts_dictionary[highscore_enemies] = "highscore_enemies"
 	texts_dictionary[highscore_time] = "highscore_time"
 	
+	load_points()
 	load_texts()
+
+func load_points():
+	if Scoring.s_score > Scoring.hs_highscore:
+		Scoring.hs_highscore = Scoring.s_score
+		Scoring.hs_time = Scoring.s_time
+		Scoring.hs_enemies = Scoring.s_enemies
+		Scoring.hs_gold = Scoring.s_gold
 
 func load_texts():
 	var string_score = "%3.2f"
 	var string_time = "TIME: %3.3fs"
 	var string_gold = "GOLD COLLECTED: x%d"
-	var string_enemies = "ENEMIES KILLED: %d * 10"
+	var string_enemies = "ENEMIES KILLED: %d"
 	
 	score.text = string_score % Scoring.s_score
 	score_time.text = string_time % Scoring.s_time

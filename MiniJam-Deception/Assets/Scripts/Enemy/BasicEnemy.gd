@@ -213,7 +213,7 @@ func stop_agent_following():
 """|||||||||||||||||||||||||||||||||||| ACTIONS |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
 func attack():
-	random_num = rng.randf_range(0.5, 1.5)
+	random_num = rng.randf_range(0.3, 0.5)
 	$SFX/Attack.pitch_scale = random_num
 	$SFX/Attack.play()
 	is_attacking = can_attack
@@ -268,7 +268,6 @@ func take_damage(dmg, push_direction, force):
 func die():
 	player.update_enemy_kill_count(1)
 	$CollisionShape2D.set_deferred("disabled", true)
-	light_mask
 	open_doors_on_death()
 	alert_other_enemies(true)
 	
