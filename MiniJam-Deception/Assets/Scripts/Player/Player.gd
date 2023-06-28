@@ -245,5 +245,3 @@ func fade_to_black_screen(final, duration):
 	b_screen_tween.connect("finished",change_scene)
 	
 	b_screen_tween.tween_property(black_screen, "modulate", Color(1,1,1,final), duration)
-
-

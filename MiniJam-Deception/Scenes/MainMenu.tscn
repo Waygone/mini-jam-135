@@ -127,6 +127,7 @@ text = "Credits
 "
 
 [node name="Main Music" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(646, 367)
 stream = ExtResource("3_xqoe1")
 autoplay = true
 bus = &"Music"
