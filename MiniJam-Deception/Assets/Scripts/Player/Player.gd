@@ -16,7 +16,13 @@ class_name Player
 
 
 @onready var starting_point = global_position
+
+var is_level_finished = false
+var next_level
 var save_system
+
+@onready var black_screen = $ScreenEffects/FadeToBlackScreen
+var b_screen_tween : Tween
 
 """|||||||||||||||||||||||||||||||||||| VARs |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
@@ -28,6 +34,7 @@ var save_system
 	get:
 		return hp
 signal hp_changed(new_hp)
+@onready var max_hp = hp
 
 @export var gold = 0.0:
 	set(value):
@@ -37,7 +44,12 @@ signal hp_changed(new_hp)
 signal gold_changed(new_gold)
 
 const FRICTION = 10
-var stopwatch = 0.0
+@export var stopwatch = 0.0:
+	set(value):
+		stopwatch = value
+	get:
+		return stopwatch
+signal level_timer_changed(new_time)
 
 """|||||||||||||||||||||||||||||||||||| ACTIONS |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
@@ -49,6 +61,8 @@ var is_disguised = false
 var is_moving = false
 var idle = true
 
+var enemy_kill_count = 0
+
 var is_ready = false
 
 """|||||||||||||||||||||||||||||||||||| CALLBACK |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
@@ -57,27 +71,25 @@ func _ready():
 	damage_area_collision.disabled = true
 	disguised_sprite.visible = false
 	
-	save_system = get_tree().get_first_node_in_group("Save")
 	animation_tree.active = true
+	
+	save_system = get_tree().get_first_node_in_group("Save")
+	
 	is_ready = true
 	
 func _process(delta):
-	stopwatch += delta
+	update_level_timer(delta)
 
 func _physics_process(_delta):
 	movement_input(_delta)
 	actions_input()
 	move_and_slide()
 
-func collect_points(points: int):
-	var levelName = "One"  # Assuming the level scene name is used as the level identifier
-	var totalPoints = save_system.load_points(levelName)
-	totalPoints += points
-	save_system.save_points(levelName, totalPoints)
-	emit_signal("gold_changed", totalPoints)
+func update_enemy_kill_count(kills):
+	enemy_kill_count += kills
 
 func _on_load_save_system_timer_timeout():
-	collect_points(0)
+	pass
 
 """|||||||||||||||||||||||||||||||||||| INPUT |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
@@ -106,7 +118,7 @@ func attack():
 
 func _on_damage_area_body_entered(body):
 	if body.is_in_group("Enemy"):
-		body.take_damage(attack_damage, body.global_position - global_position, 25)
+		body.take_damage(attack_damage, Vector2(body.global_position.x, body.global_position.y) - Vector2(global_position.x -5, global_position.y-5), 50)
 	
 func interact():
 	is_interacting = true
@@ -117,9 +129,9 @@ func disguise(is_dis: bool):
 	disguised_sprite.visible = is_dis
 
 func add_gold(amount):
-	$GetTreasure.play()
+	$SFX/GetTreasure.play()
 	gold += amount
-	collect_points(amount)
+	emit_signal("gold_changed", gold)
 	#emit_signal("gold_changed", gold)
 
 """|||||||||||||||||||||||||||||||||||| HEALTH |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
@@ -130,17 +142,76 @@ func set_hp(new_hp):
 	
 
 func take_damage(damage, push_direction, force):
-	$GotHit.play()
+	$SFX/GotHit.play()
 	velocity += push_direction * force
 	move_and_slide()
 	
 	self.hp -= damage
 	state_machine.set_state(state_machine.states.Damaged if hp > 0 else state_machine.states.Dead)
 	
-	emit_signal("hp_changed", hp)
+	set_hp(hp)
 	
 
 func die():
-	$PlayerDie.play()
-	pass
+	$SFX/PlayerDie.play()
+	fade_to_black_screen(1,1)
+	global_position = starting_point
+	set_hp(max_hp)
+	
+
+"""|||||||||||||||||||||||||||||||||||| TIME |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
+
+func update_level_timer(delta):
+	if !is_level_finished:
+		stopwatch += delta
+		emit_signal("level_timer_changed", seconds2hhmmss(stopwatch))
+
+func seconds2hhmmss(total_seconds: float) -> String:
+	var seconds:float = fmod(total_seconds , 60.0)
+	var minutes:int   =  int(total_seconds / 60.0) % 60
+	#var hours:  int   =  int(total_seconds / 3600.0)
+	var hhmmss_string:String = "%02d:%04.1f" % [minutes, seconds]
+	return hhmmss_string
+	
+"""|||||||||||||||||||||||||||||||||||| LEVEL |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
+
+func change_level(level):
+	
+	Scoring.s_gold = gold
+	Scoring.s_enemies = enemy_kill_count
+	Scoring.s_time = stopwatch
+	
+	Scoring.s_score = (gold - (enemy_kill_count * 10))/stopwatch
+	
+	if Scoring.s_score > Scoring.hs_highscore:
+		Scoring.hs_highscore = Scoring.s_score
+		Scoring.hs_time = Scoring.s_time
+		Scoring.hs_enemies = Scoring.s_enemies
+		Scoring.hs_gold = Scoring.s_gold
+	
+	
+	next_level = level
+	fade_to_black_screen(1,1)
+	is_level_finished = true
+#
+#	var save_dict = {
+#			"level" : save_system.level,
+#	}
+#	var json_string = JSON.stringify(save_dict)
+#	save_system.save_data(json_string)
+	
+
+func change_scene():
+	get_tree().change_scene_to_packed(next_level)
+	
+	
+	
+func fade_to_black_screen(final, duration):
+	if b_screen_tween: b_screen_tween.kill()
+	
+	b_screen_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	b_screen_tween.connect("finished",change_scene)
+	
+	b_screen_tween.tween_property(black_screen, "modulate", Color(1,1,1,final), duration)
+
 

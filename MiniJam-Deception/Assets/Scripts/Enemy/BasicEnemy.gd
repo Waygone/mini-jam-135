@@ -8,7 +8,7 @@ class_name BasicEnemy
 enum{
 	Idle,
 	Walk,
-	Attackasdf,
+	Attack,
 	Damaged,
 }
 
@@ -25,14 +25,14 @@ enum{
 
 """|||||||||||||||||||||||||||||||||||| VARs |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
-@export var speed = 80.0
+@export var speed = 120.0
 
 @export var hp = 40:
 	set(value):
 		hp = value
 	get:
 		return hp
-@export var damage = 5.0
+@export var damage = 8.0
 
 @export var attack_rate = 0.9
 @export var max_time_reach = 20.0
@@ -43,6 +43,8 @@ var disguise_scene = preload("res://Assets/Prefabs/Pickables/Disguise.tscn")
 @export var waypoints: Array[NodePath]
 var waypoint_index = 0
 @onready var starting_point = global_position
+
+@export var doors_to_open: Array[NodePath]
 
 const RADIUS_AROUND_PLAYER = 40
 
@@ -60,6 +62,8 @@ var is_roaming = false
 var can_attack = true
 
 var is_ready = false
+
+var rng
 
 var player_detected = false
 
@@ -80,7 +84,7 @@ func _ready():
 	
 	player = get_tree().get_first_node_in_group("Player")
 	
-	var rng = RandomNumberGenerator.new()
+	rng = RandomNumberGenerator.new()
 	rng.randomize()
 	random_num = rng.randf()
 	
@@ -90,11 +94,11 @@ func _ready():
 
 
 func _process(_delta):
-	if !is_dead:
+	if !is_dead and !player.is_level_finished:
 		detect_player()
 
 func _physics_process(_delta):
-	if !is_dead:
+	if !is_dead and !player.is_level_finished:
 		movement_handler()
 
 """|||||||||||||||||||||||||||||||||||| HANDLERS |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
@@ -136,7 +140,7 @@ func create_path(target):
 
 
 func _on_navigation_timer_timeout():
-	if(player_detected and !is_attacking):# and nav_agent.is_target_reachable()):
+	if(player_detected and !is_attacking and !player.is_dead):# and nav_agent.is_target_reachable()):
 		create_path(player.global_position)
 
 	elif !is_roaming and player_detected:
@@ -176,7 +180,7 @@ func _on_detection_area_body_entered(body):
 #			alert_other_enemies(true)
 	
 func on_player_detected():
-	player_detected = true
+	player_detected = true && !player.is_dead
 	is_roaming = false
 	alert_other_enemies(true)
 
@@ -186,7 +190,8 @@ func alert_other_enemies(alert):
 func _on_alert_other_enemy_body_entered(body):
 	if body.is_in_group("Enemy"):
 		if !body.player_detected:
-			on_player_detected()
+			print("alerted: "+body.name)
+			body.on_player_detected()
 	
 func _on_attack_area_body_entered(body):
 	if body.is_in_group("Player"):
@@ -198,7 +203,7 @@ func _on_attack_area_body_exited(body):
 	
 func _on_damage_area_body_entered(body):
 	if body.is_in_group("Player"):
-		body.take_damage(damage, body.global_position - global_position, 10)
+		body.take_damage(damage, Vector2(body.global_position.x, body.global_position.y) - Vector2(global_position.x -5, global_position.y-5) , 10)
 		body.disguise(false)
 
 func stop_agent_following():
@@ -208,6 +213,9 @@ func stop_agent_following():
 """|||||||||||||||||||||||||||||||||||| ACTIONS |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
 func attack():
+	random_num = rng.randf_range(0.5, 1.5)
+	$SFX/Attack.pitch_scale = random_num
+	$SFX/Attack.play()
 	is_attacking = can_attack
 	could_not_reach_timer.stop()
 	
@@ -246,7 +254,7 @@ func _on_navigation_agent_2d_target_reached():
 """|||||||||||||||||||||||||||||||||||| DAMAGE |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
 func take_damage(dmg, push_direction, force):
-	#is_attacking = false
+	is_attacking = false
 	force = force if hp > 0 else force * 2
 	velocity += push_direction * force
 	move_and_slide()
@@ -258,18 +266,30 @@ func take_damage(dmg, push_direction, force):
 		state_machine.set_state(state_machine.states.Damaged if hp > 0 else state_machine.states.Dead)
 
 func die():
+	player.update_enemy_kill_count(1)
 	$CollisionShape2D.set_deferred("disabled", true)
+	light_mask
+	open_doors_on_death()
 	alert_other_enemies(true)
-	if !player.is_disguised:
+	
+	if !player.is_disguised and drops_disguise:
 		var disguise_instance = disguise_scene.instantiate()
 		disguise_instance.global_position = global_position
 		get_tree().get_root().get_node("World/Treasures").add_child(disguise_instance)
+	
 	$Timers/DeathTimer.start()
 	$DeathParticles.set_deferred("emitting", true)
 	$AnimatedSprite2D.visible = false
-	#$Die.play()
+	
+	rng.randomize()
+	random_num = rng.randf_range(0.5, 1.5)
+	$SFX/Die.pitch_scale = random_num
+	$SFX/Die.play()
 
-
+func open_doors_on_death():
+	if len(doors_to_open) > 0:
+		for i in doors_to_open:
+			get_node(i).open()
 
 func _on_death_timer_timeout():
 	queue_free()

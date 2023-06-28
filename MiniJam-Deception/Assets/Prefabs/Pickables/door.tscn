@@ -1,14 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://c10te28uubpen"]
+[gd_scene load_steps=7 format=3 uid="uid://c10te28uubpen"]
 
 [ext_resource type="PackedScene" uid="uid://cfos036fvag1d" path="res://Assets/Prefabs/Pickable.tscn" id="1_0hraf"]
 [ext_resource type="Script" path="res://Assets/Scripts/Pickables/Door.gd" id="2_yw7dr"]
+[ext_resource type="Texture2D" uid="uid://s6sitadk15on" path="res://sprites/tileset.png" id="3_foh42"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3pfd"]
+atlas = ExtResource("3_foh42")
+region = Rect2(32, 32, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hximu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3pfd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_46dvg"]
+size = Vector2(32, 16)
 
 [node name="Door" instance=ExtResource("1_0hraf")]
 script = ExtResource("2_yw7dr")
 
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_hximu")
+
 [node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_46dvg")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

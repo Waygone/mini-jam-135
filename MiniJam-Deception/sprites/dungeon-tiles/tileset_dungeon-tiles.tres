@@ -1,6 +1,60 @@
-[gd_resource type="TileSet" load_steps=31 format=3 uid="uid://bxgjbs1ew1kp"]
+    [gd_resource type="TileSet" load_steps=34 format=3 uid="uid://bxgjbs1ew1kp"]
 
-[ext_resource type="Texture2D" uid="uid://cb3uwabfja5nb" path="res://Sprites/dungeon-tiles/tileset_dungeon-tiles.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://cb3uwabfja5nb" path="res://sprites/dungeon-tiles/tileset_dungeon-tiles.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://ci5hc6q387kwo" path="res://sprites/dungeon-wall-wang.png" id="2_c3blj"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ku78q"]
+texture = ExtResource("1")
+texture_region_size = Vector2i(32, 32)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3c3pe"]
+texture = ExtResource("2_c3blj")
+texture_region_size = Vector2i(32, 32)
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+3:1/0 = 0
+3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:1/0/physics_layer_0/angular_velocity = 0.0
+3:2/0 = 0
+3:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:2/0/physics_layer_0/angular_velocity = 0.0
+2:2/0 = 0
+2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:2/0/physics_layer_0/angular_velocity = 0.0
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:2/0 = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+4:1/0 = 0
+4:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:1/0/physics_layer_0/angular_velocity = 0.0
+4:0/0 = 0
+4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:0/0/physics_layer_0/angular_velocity = 0.0
+4:2/0 = 0
+4:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:2/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5mpa7"]
 vertices = PackedVector2Array(-4, -4.5, 16, -4.5, 16, 16, -4, 16)
@@ -305,3 +359,5 @@ terrain_set_0/terrain_0/name = "Dungeon"
 terrain_set_0/terrain_0/color = Color(0.705882, 0, 0, 1)
 navigation_layer_0/layers = 1
 sources/3 = SubResource("TileSetAtlasSource_b5rf1")
+sources/0 = SubResource("TileSetAtlasSource_ku78q")
+sources/1 = SubResource("TileSetAtlasSource_3c3pe")

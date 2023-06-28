@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://1bvqyfutrlfr"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/UnlockableDoor.gd" id="1_u466a"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e0vw2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_78u41"]
+
+[node name="UnlockableDoor" type="StaticBody2D"]
+script = ExtResource("1_u466a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_e0vw2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_78u41")

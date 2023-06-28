@@ -4,25 +4,38 @@ extends Node
 
 func _ready():
 	if level == 0:
-		save_points("One", 0)
+		Scoring.s_score = 0
+		Scoring.s_gold = 0
+		Scoring.s_enemies = 0
+		Scoring.s_time = 0.0
+#		var save_dict = {
+#			"level" : 0,
+#		}
+#		var json_string = JSON.stringify(save_dict)
+#		save_data(json_string)
 
-func save_points(level_name: String, points: int):
+
+
+func save_data(json : String):
 	var save_file = FileAccess.open("user://save_game.dat", FileAccess.WRITE)
-	save_file.store_line(level_name + "=" + str(points))
+	save_file.store_line(json)
 	save_file.close()
 
-func load_points(level_name: String) -> int:
-	var save_file = FileAccess.open("user://save_game.dat", FileAccess.READ)
-	
-	if FileAccess.file_exists("user://save_game.dat"):
-		FileAccess.open("user://save_game.dat", FileAccess.READ)
-		while !save_file.eof_reached():
-			var line = save_file.get_line().strip_edges()
-			print(line)
-			if line.begins_with(level_name + "="):
-				var points_str = line.split("=")[1]
-				save_file.close()
-				return points_str.to_int()
-		save_file.close()
+func load_data(level: String) -> Dictionary:
+	var save_game = FileAccess.open("user://save_game.dat", FileAccess.READ)
+	while save_game.get_position() < save_game.get_lengths():
+		var json_string = save_game.get_line()
 
-	return 0
+		var json = JSON.new()
+
+		# Check if there is any error while parsing the JSON string, skip in case of failure
+		var parse_result = json.parse(json_string)
+		if not parse_result == OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			continue
+
+		var data = json.get_data()
+		if data["level"] == level:
+			return data
+		
+	return {}

@@ -1,3 +1,224 @@
-[gd_scene format=3 uid="uid://cfss6y4j66m37"]
+[gd_scene load_steps=11 format=3 uid="uid://cfss6y4j66m37"]
 
-[node name="WinScreen" type="Node2D"]
+[ext_resource type="Script" path="res://Assets/Scripts/Base/WinScreen.gd" id="1_4bidp"]
+[ext_resource type="FontFile" uid="uid://bfkfgwlyw3tbo" path="res://Assets/Font/bold-font/Bold-X3RG.ttf" id="1_6wj2i"]
+[ext_resource type="LabelSettings" uid="uid://duafchnuhsa37" path="res://Assets/Font/Title.tres" id="1_jdki5"]
+[ext_resource type="LabelSettings" uid="uid://o213dknt5d6f" path="res://Assets/Font/ScoreText.tres" id="3_gtag3"]
+[ext_resource type="LabelSettings" uid="uid://5dot03rhkiy5" path="res://Assets/Font/Signs.tres" id="4_w74af"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6rrdy"]
+font = ExtResource("1_6wj2i")
+font_size = 30
+font_color = Color(0.831373, 0.686275, 0.215686, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.501961)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_y8kg7"]
+font = ExtResource("1_6wj2i")
+font_size = 30
+font_color = Color(0, 0.45098, 0.462745, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.592157)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cnh22"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_67slx"]
+bg_color = Color(0.643137, 0.643137, 0.643137, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ffdtm"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="WinScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_4bidp")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -495.0
+offset_right = 495.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoresVContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="ScoreContainer" type="VBoxContainer" parent="MarginContainer/ScoresVContainer"]
+clip_contents = true
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="ScoreText" type="Label" parent="MarginContainer/ScoresVContainer/ScoreContainer"]
+layout_mode = 2
+text = "SCORE"
+label_settings = ExtResource("1_jdki5")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="score" type="Label" parent="MarginContainer/ScoresVContainer/ScoreContainer"]
+layout_mode = 2
+text = "2000"
+label_settings = ExtResource("3_gtag3")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScoresVContainer/ScoreContainer"]
+layout_mode = 2
+theme_override_constants/separation = 22
+alignment = 1
+
+[node name="gold" type="Label" parent="MarginContainer/ScoresVContainer/ScoreContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "GOLD COLLECTED: x1000"
+label_settings = SubResource("LabelSettings_6rrdy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="-" type="Label" parent="MarginContainer/ScoresVContainer/ScoreContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "-"
+label_settings = ExtResource("4_w74af")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="enemies" type="Label" parent="MarginContainer/ScoresVContainer/ScoreContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "ENEMIES KILLED: 20"
+label_settings = ExtResource("4_w74af")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="div" type="Label" parent="MarginContainer/ScoresVContainer/ScoreContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "/"
+label_settings = ExtResource("4_w74af")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="time" type="Label" parent="MarginContainer/ScoresVContainer/ScoreContainer/HBoxContainer"]
+layout_mode = 2
+text = "TIME: 50s"
+label_settings = SubResource("LabelSettings_y8kg7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighscoreContainer" type="VBoxContainer" parent="MarginContainer/ScoresVContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="HighscoreText" type="Label" parent="MarginContainer/ScoresVContainer/HighscoreContainer"]
+layout_mode = 2
+text = "HIGHSCORE"
+label_settings = ExtResource("1_jdki5")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="highscore" type="Label" parent="MarginContainer/ScoresVContainer/HighscoreContainer"]
+layout_mode = 2
+text = "20000"
+label_settings = ExtResource("3_gtag3")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScoresVContainer/HighscoreContainer"]
+layout_mode = 2
+theme_override_constants/separation = 22
+alignment = 1
+
+[node name="gold" type="Label" parent="MarginContainer/ScoresVContainer/HighscoreContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "GOLD COLLECTED: x1000"
+label_settings = SubResource("LabelSettings_6rrdy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="-" type="Label" parent="MarginContainer/ScoresVContainer/HighscoreContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "-"
+label_settings = ExtResource("4_w74af")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="enemies" type="Label" parent="MarginContainer/ScoresVContainer/HighscoreContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "ENEMIES KILLED: 20"
+label_settings = ExtResource("4_w74af")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="div" type="Label" parent="MarginContainer/ScoresVContainer/HighscoreContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "/"
+label_settings = ExtResource("4_w74af")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="time" type="Label" parent="MarginContainer/ScoresVContainer/HighscoreContainer/HBoxContainer"]
+layout_mode = 2
+text = "TIME: 50s"
+label_settings = SubResource("LabelSettings_y8kg7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/ScoresVContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.996078, 0.996078, 0.996078, 1)
+theme_override_colors/font_hover_color = Color(0.94902, 0, 0.403922, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0.45098, 0.462745, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_6wj2i")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_cnh22")
+theme_override_styles/hover = SubResource("StyleBoxFlat_67slx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ffdtm")
+text = "PLAY AGAIN"
+text_overrun_behavior = 2
+clip_text = true
+icon_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/ScoresVContainer/Button" to="." method="_on_button_pressed"]

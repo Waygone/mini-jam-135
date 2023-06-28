@@ -1,12 +1,15 @@
-[gd_scene load_steps=115 format=3 uid="uid://du76st4c5ioh0"]
+[gd_scene load_steps=126 format=3 uid="uid://du76st4c5ioh0"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Enemy/BasicEnemy.gd" id="1_bissd"]
 [ext_resource type="Script" path="res://Assets/Scripts/Enemy/BasicEnemyFSM.gd" id="1_fj8ch"]
 [ext_resource type="Texture2D" uid="uid://dwe8or6ey3rn1" path="res://sprites/character animations/skeleton-basic-enemy-attack.png" id="2_4hn5f"]
+[ext_resource type="Texture2D" uid="uid://dqhs4kgqc2awt" path="res://Assets/Sprites/Placeholder/attack1.png" id="4_y7xpi"]
+[ext_resource type="AudioStream" uid="uid://cku3a7u6xyuo4" path="res://Assets/Audio/SFX/Skele Die_SFX__MiniJam.wav" id="6_hcoun"]
 [ext_resource type="Texture2D" uid="uid://jbt1jy1ko2m4" path="res://sprites/character animations/skeleton-basic-enemy-walk.png" id="6_rr4b0"]
 [ext_resource type="Texture2D" uid="uid://dg25e1583fsv2" path="res://Assets/Sprites/Placeholder/white.png" id="7_4be5s"]
+[ext_resource type="AudioStream" uid="uid://dl21700e7vfep" path="res://Assets/Audio/SFX/Katana.wav" id="7_qr5s6"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nkgi6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wbd0l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hfwyt"]
 atlas = ExtResource("2_4hn5f")
@@ -485,6 +488,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pcgfe"]
+light_mode = 2
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_jdhgd"]
 radius = 21.0
 
@@ -495,7 +501,7 @@ radius = 20.0
 radius = 43.1045
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_te7ev"]
-radius = 123.037
+radius = 155.003
 
 [sub_resource type="Animation" id="Animation_lp1qj"]
 resource_name = "Attack_D"
@@ -1217,6 +1223,9 @@ sync = true
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c7rjn"]
 animation = &"Damaged"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f7ddn"]
+animation = &"Dead"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_774jd"]
 animation = &"Idle_D"
 
@@ -1271,7 +1280,6 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wah6o"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jplk5"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gevwe"]
 switch_mode = 2
@@ -1280,7 +1288,6 @@ switch_mode = 2
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k8nug"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sgshe"]
 
@@ -1293,17 +1300,38 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q63au"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6vig4"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a07sa"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xo5ii"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_navao"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dcxve"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lytef"]
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fue6v"]
 states/Attack/node = SubResource("AnimationNodeBlendSpace2D_3mltp")
-states/Attack/position = Vector2(663, 46)
+states/Attack/position = Vector2(647, 288)
 states/Damaged/node = SubResource("AnimationNodeAnimation_c7rjn")
-states/Damaged/position = Vector2(477, -72)
+states/Damaged/position = Vector2(489, -76)
+states/Dead/node = SubResource("AnimationNodeAnimation_f7ddn")
+states/Dead/position = Vector2(712, 22)
+states/End/position = Vector2(938, 22)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_8riy8")
-states/Idle/position = Vector2(366, 92)
+states/Idle/position = Vector2(264, 15)
+states/Start/position = Vector2(26, 15)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_cg4hh")
-states/Walk/position = Vector2(514, 171)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_b3jsa"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_wah6o"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_jplk5"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_gevwe"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_lib72"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_k8nug"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_sgshe"), "Walk", "Damaged", SubResource("AnimationNodeStateMachineTransition_376cp"), "Attack", "Damaged", SubResource("AnimationNodeStateMachineTransition_80785"), "Idle", "Damaged", SubResource("AnimationNodeStateMachineTransition_hfn8a"), "Damaged", "Walk", SubResource("AnimationNodeStateMachineTransition_q63au")]
-graph_offset = Vector2(-144, -55)
+states/Walk/position = Vector2(326, 288)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_b3jsa"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_wah6o"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_jplk5"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_gevwe"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_lib72"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_k8nug"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_sgshe"), "Walk", "Damaged", SubResource("AnimationNodeStateMachineTransition_376cp"), "Attack", "Damaged", SubResource("AnimationNodeStateMachineTransition_80785"), "Idle", "Damaged", SubResource("AnimationNodeStateMachineTransition_hfn8a"), "Damaged", "Walk", SubResource("AnimationNodeStateMachineTransition_q63au"), "Idle", "Dead", SubResource("AnimationNodeStateMachineTransition_6vig4"), "Attack", "Dead", SubResource("AnimationNodeStateMachineTransition_a07sa"), "Damaged", "Dead", SubResource("AnimationNodeStateMachineTransition_xo5ii"), "Walk", "Dead", SubResource("AnimationNodeStateMachineTransition_navao"), "Damaged", "Attack", SubResource("AnimationNodeStateMachineTransition_dcxve"), "Dead", "End", SubResource("AnimationNodeStateMachineTransition_lytef")]
+graph_offset = Vector2(-266, 65)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_nk4k1"]
 
@@ -1315,7 +1343,8 @@ height = 32.0
 light_mask = 2
 visibility_layer = 2
 z_index = 2
-collision_layer = 3
+material = SubResource("ShaderMaterial_wbd0l")
+collision_layer = 2
 collision_mask = 2
 motion_mode = 1
 wall_min_slide_angle = 0.0
@@ -1325,9 +1354,14 @@ script = ExtResource("1_bissd")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 light_mask = 2
 visibility_layer = 2
-material = SubResource("ShaderMaterial_nkgi6")
 sprite_frames = SubResource("SpriteFrames_d0m37")
 animation = &"Attack"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 15
+visibility_layer = 15
+material = SubResource("CanvasItemMaterial_pcgfe")
+texture = ExtResource("4_y7xpi")
 
 [node name="Area2Ds" type="Node2D" parent="."]
 
@@ -1353,7 +1387,8 @@ monitorable = false
 shape = SubResource("CircleShape2D_5f1p8")
 
 [node name="AlertOtherEnemy" type="Area2D" parent="Area2Ds"]
-visible = false
+collision_layer = 2
+collision_mask = 2
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/AlertOtherEnemy"]
@@ -1427,7 +1462,6 @@ one_shot = true
 target_desired_distance = 100.0
 path_postprocessing = 1
 max_neighbors = 3
-debug_enabled = true
 
 [node name="DeathParticles" type="CPUParticles2D" parent="."]
 emitting = false
@@ -1448,6 +1482,16 @@ angle_max = 360.0
 scale_amount_min = 0.05
 scale_amount_max = 0.1
 color = Color(0.745098, 0.745098, 0.745098, 1)
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="Die" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_hcoun")
+
+[node name="Attack" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("7_qr5s6")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
 
 [connection signal="body_entered" from="Area2Ds/DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_entered" from="Area2Ds/AttackDetectionArea" to="." method="_on_attack_area_body_entered"]
