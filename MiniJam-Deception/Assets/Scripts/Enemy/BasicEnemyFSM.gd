@@ -24,7 +24,7 @@ func _get_transition():
 			if parent.is_attacking:
 				return states.Attack
 				
-			elif parent.player_detected:
+			elif parent.is_roaming:
 				#get_parent().get_node("SoundFX/Walk").playing = true
 				return states.Walk
 				
@@ -38,7 +38,6 @@ func _get_transition():
 		
 		states.Attack:
 			if stoped_attacking:
-				
 				parent.start_attack_timer()
 				return states.Idle
 

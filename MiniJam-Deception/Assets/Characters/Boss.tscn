@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://1dcxpwcskqac"]
+[gd_scene load_steps=102 format=3 uid="uid://1dcxpwcskqac"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Enemy/BasicEnemy.gd" id="1_8b6xt"]
 [ext_resource type="Texture2D" uid="uid://ja3cp7txfr5p" path="res://sprites/character animations/skeleton-king-boss-attack.png" id="2_3qas8"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dg25e1583fsv2" path="res://Assets/Sprites/Placeholder/white.png" id="5_utp7o"]
 [ext_resource type="AudioStream" uid="uid://cku3a7u6xyuo4" path="res://Assets/Audio/SFX/Skele Die_SFX__MiniJam.wav" id="7_nhgtc"]
 [ext_resource type="AudioStream" uid="uid://e4bpto28jgcr" path="res://Assets/Audio/SFX/HeavyWeapon.wav" id="8_ar4eg"]
+[ext_resource type="AudioStream" uid="uid://env7wjfwakxc" path="res://Assets/Audio/SFX/DeathCrumbles.wav" id="9_qun16"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nkgi6"]
 
@@ -1316,6 +1317,10 @@ stream = ExtResource("7_nhgtc")
 [node name="Attack" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("8_ar4eg")
 pitch_scale = 0.7
+
+[node name="Damaged" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("9_qun16")
+volume_db = 5.0
 
 [connection signal="body_entered" from="Area2Ds/DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_entered" from="Area2Ds/AttackDetectionArea" to="." method="_on_attack_area_body_entered"]

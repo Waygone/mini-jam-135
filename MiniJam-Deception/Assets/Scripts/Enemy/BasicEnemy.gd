@@ -5,12 +5,6 @@ class_name BasicEnemy
 """|||||||||||||||||||||||||||||||||||| NODES |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
 @onready var state_machine = $FiniteStateMachine
-enum{
-	Idle,
-	Walk,
-	Attack,
-	Damaged,
-}
 
 
 @onready var damage_area_collision = $Area2Ds/DamageArea/CollisionShape2D
@@ -59,7 +53,6 @@ var random_num
 var is_dead = false
 var is_attacking = false
 var is_roaming = false
-var can_attack = true
 
 var is_ready = false
 
@@ -195,6 +188,7 @@ func _on_alert_other_enemy_body_entered(body):
 	
 func _on_attack_area_body_entered(body):
 	if body.is_in_group("Player"):
+		print("player entered")
 		attack()
 
 func _on_attack_area_body_exited(body):
@@ -213,17 +207,16 @@ func stop_agent_following():
 """|||||||||||||||||||||||||||||||||||| ACTIONS |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
 func attack():
-	random_num = rng.randf_range(0.3, 0.5)
+	random_num = rng.randf_range(0.5, 1.0)
 	$SFX/Attack.pitch_scale = random_num
 	$SFX/Attack.play()
-	is_attacking = can_attack
+	is_attacking = true
 	could_not_reach_timer.stop()
 	
 func start_attack_timer():
 	attack_rate_timer.start()
 
 func _on_attack_rate_timeout():
-	can_attack = true
 	attack_area_collision.disabled = false
 
 func _on_could_not_reach_player_timeout():
@@ -247,6 +240,8 @@ func roam():
 func _on_navigation_agent_2d_navigation_finished():
 	if !player_detected:
 		roam()
+	else:
+		stop_agent_following()
 
 func _on_navigation_agent_2d_target_reached():
 	pass
@@ -255,6 +250,8 @@ func _on_navigation_agent_2d_target_reached():
 
 func take_damage(dmg, push_direction, force):
 	is_attacking = false
+	$SFX/Damaged.play()
+	
 	force = force if hp > 0 else force * 2
 	velocity += push_direction * force
 	move_and_slide()

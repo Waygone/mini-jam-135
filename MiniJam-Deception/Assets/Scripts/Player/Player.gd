@@ -14,6 +14,7 @@ class_name Player
 @onready var animation_tree = $AnimationTree
 @onready var animation_state = animation_tree["parameters/playback"]
 
+@onready var attack_rate_timer = $Timers/AttackRate
 
 @onready var starting_point = global_position
 
@@ -32,8 +33,18 @@ var rng
 
 """|||||||||||||||||||||||||||||||||||| VARs |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
-@export var speed = 150.0
+const SPEED = 150.0
+
 @export var attack_damage = 10.0
+var attack_timer_started = false
+@export var attack_rate = 0.7
+var attack_time = 0.0:
+	set(value):
+		attack_time = value
+	get:
+		return attack_time
+signal attack_time_left(attack_time)
+
 @export var hp = 100:
 	set(value):
 		hp = value
@@ -65,7 +76,8 @@ signal level_timer_changed(new_time)
 
 var is_dead = false
 var is_attacking = false
-var is_interacting = false
+var can_attack = true
+
 var is_disguised = false
 
 var is_moving = false
@@ -86,6 +98,9 @@ func _ready():
 	
 	is_ready = true
 	
+	attack_rate_timer.wait_time = attack_rate
+	attack_rate_timer.autostart = false
+	
 	vignette.material.set("shader_parameter/multiplier", vignette_m);
 	vignette.material.set("shader_parameter/softness", vignette_s);
 	
@@ -105,8 +120,6 @@ func _physics_process(_delta):
 func update_enemy_kill_count(kills):
 	enemy_kill_count += kills
 
-func _on_load_save_system_timer_timeout():
-	pass
 
 """|||||||||||||||||||||||||||||||||||| INPUT |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
@@ -118,30 +131,37 @@ func movement_input(delta):
 		animation_tree.set("parameters/Idle/blend_position", move_dir)
 		animation_tree.set("parameters/Walk/blend_position", move_dir)
 	
-	var desired_vel = move_dir * speed
+	var desired_vel = move_dir * SPEED
 	var steering = (desired_vel - velocity) * delta * FRICTION
 	velocity += steering
 	
 func actions_input():
 	if(Input.is_action_just_pressed("attack")):
-		attack()
-	if(Input.is_action_just_pressed("interact")):
-		interact()
+		if can_attack:
+			attack()
 
 """|||||||||||||||||||||||||||||||||||| ACTIONS |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"""
 
 func attack():
+	can_attack = false
 	is_attacking = true
 	var random_num = rng.randf_range(0.5, 0.9)
 	$SFX/Attack.pitch_scale = random_num
 	$SFX/Attack.play()
 
+func _on_attack_rate_timeout():
+	can_attack = true
+	attack_timer_started = false
+#	emit_signal("attack_time_left", attack_rate)
+	
+func start_attack_timer():
+	attack_rate_timer.start()
+	attack_timer_started = true
+
 func _on_damage_area_body_entered(body):
 	if body.is_in_group("Enemy"):
 		body.take_damage(attack_damage, Vector2(body.global_position.x, body.global_position.y) - Vector2(global_position.x -5, global_position.y-5), 50)
 	
-func interact():
-	is_interacting = true
 
 func disguise(is_dis: bool):
 	is_disguised = is_dis
@@ -201,6 +221,8 @@ func update_level_timer(delta):
 	if !is_level_finished:
 		stopwatch += delta
 		emit_signal("level_timer_changed", seconds2hhmmss(stopwatch))
+	if attack_timer_started:
+		emit_signal("attack_time_left", attack_rate - attack_rate_timer.time_left)
 
 func seconds2hhmmss(total_seconds: float) -> String:
 	var seconds:float = fmod(total_seconds , 60.0)
