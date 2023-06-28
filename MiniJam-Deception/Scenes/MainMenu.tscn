@@ -51,8 +51,8 @@ grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 25
 theme_override_fonts/font = ExtResource("1_1gusn")
-theme_override_font_sizes/font_size = 120
-text = "Disguise Game"
+theme_override_font_sizes/font_size = 100
+text = "Dungeon of Deception"
 horizontal_alignment = 1
 vertical_alignment = 1
 

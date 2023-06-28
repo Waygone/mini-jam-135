@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://djdtn3qc5y3di"
-path="res://.godot/imported/skeleton-king-boss-walk.png-d1f8aa76cde47f583949e822e3f72bed.ctex"
+path="res://.godot/imported/skeleton-king-boss-walk.png-23498ffe64483ec6b7ad61749f229665.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/character animations/skeleton-king-boss-walk.png"
-dest_files=["res://.godot/imported/skeleton-king-boss-walk.png-d1f8aa76cde47f583949e822e3f72bed.ctex"]
+source_file="res://Sprites/character animations/skeleton-king-boss-walk.png"
+dest_files=["res://.godot/imported/skeleton-king-boss-walk.png-23498ffe64483ec6b7ad61749f229665.ctex"]
 
 [params]
 

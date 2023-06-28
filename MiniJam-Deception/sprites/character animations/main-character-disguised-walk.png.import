@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b0mxqetuon306"
-path="res://.godot/imported/main-character-disguised-walk.png-41f30de2d45b3ea890fb8568dc3d1f62.ctex"
+path="res://.godot/imported/main-character-disguised-walk.png-c2a2a9f3900eb9c178d3ede73b4aff6e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/character animations/main-character-disguised-walk.png"
-dest_files=["res://.godot/imported/main-character-disguised-walk.png-41f30de2d45b3ea890fb8568dc3d1f62.ctex"]
+source_file="res://Sprites/character animations/main-character-disguised-walk.png"
+dest_files=["res://.godot/imported/main-character-disguised-walk.png-c2a2a9f3900eb9c178d3ede73b4aff6e.ctex"]
 
 [params]
 
