@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://b2yg5vtcajwdd" path="res://Scenes/Options.tscn" id="10_bvhkl"]
 
 [node name="World" type="Node2D"]
+metadata/_edit_vertical_guides_ = [-172.0, 2062.0]
+metadata/_edit_horizontal_guides_ = [-204.0, 1096.0]
 
 [node name="Treasures" type="Node2D" parent="."]
 
@@ -47,6 +49,10 @@ position = Vector2(-81, 111)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.6, 1.6)
+limit_left = -170
+limit_top = -200
+limit_right = 2040
+limit_bottom = 1100
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 
@@ -113,3 +119,4 @@ bus = &"Music"
 
 [connection signal="gold_changed" from="Player" to="UI" method="_on_player_gold_changed"]
 [connection signal="hp_changed" from="Player" to="UI" method="_on_player_hp_changed"]
+[connection signal="level_timer_changed" from="Player" to="UI" method="_on_player_level_timer_changed"]

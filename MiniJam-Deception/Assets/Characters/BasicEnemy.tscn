@@ -1,8 +1,9 @@
-[gd_scene load_steps=124 format=3 uid="uid://du76st4c5ioh0"]
+[gd_scene load_steps=126 format=3 uid="uid://du76st4c5ioh0"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Enemy/BasicEnemy.gd" id="1_bissd"]
 [ext_resource type="Script" path="res://Assets/Scripts/Enemy/BasicEnemyFSM.gd" id="1_fj8ch"]
 [ext_resource type="Texture2D" uid="uid://dwe8or6ey3rn1" path="res://sprites/character animations/skeleton-basic-enemy-attack.png" id="2_4hn5f"]
+[ext_resource type="Texture2D" uid="uid://dqhs4kgqc2awt" path="res://Assets/Sprites/Placeholder/attack1.png" id="4_y7xpi"]
 [ext_resource type="AudioStream" uid="uid://cku3a7u6xyuo4" path="res://Assets/Audio/SFX/Skele Die_SFX__MiniJam.wav" id="6_hcoun"]
 [ext_resource type="Texture2D" uid="uid://jbt1jy1ko2m4" path="res://sprites/character animations/skeleton-basic-enemy-walk.png" id="6_rr4b0"]
 [ext_resource type="Texture2D" uid="uid://dg25e1583fsv2" path="res://Assets/Sprites/Placeholder/white.png" id="7_4be5s"]
@@ -486,6 +487,9 @@ animations = [{
 "name": &"Walk_U",
 "speed": 5.0
 }]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pcgfe"]
+light_mode = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jdhgd"]
 radius = 21.0
@@ -1352,6 +1356,12 @@ light_mask = 2
 visibility_layer = 2
 sprite_frames = SubResource("SpriteFrames_d0m37")
 animation = &"Attack"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 15
+visibility_layer = 15
+material = SubResource("CanvasItemMaterial_pcgfe")
+texture = ExtResource("4_y7xpi")
 
 [node name="Area2Ds" type="Node2D" parent="."]
 

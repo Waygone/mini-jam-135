@@ -1543,7 +1543,7 @@ shadow_enabled = true
 shadow_color = Color(0.0901961, 0.0901961, 0.0901961, 0.431373)
 shadow_item_cull_mask = 14
 texture = ExtResource("7_huq42")
-texture_scale = 4.0
+texture_scale = 5.0
 
 [node name="PlayerLight" type="PointLight2D" parent="."]
 energy = 0.8
